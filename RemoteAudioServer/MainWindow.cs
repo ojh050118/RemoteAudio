@@ -14,6 +14,7 @@ public partial class MainWindow : Form
 
         using (AudioCapturer capturer = new AudioCapturer())
             capturer.Start();
+        
     }
 
     private void label1_Click(object sender, EventArgs e)
