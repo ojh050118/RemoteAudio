@@ -28,7 +28,7 @@ namespace RemoteAudioServer.Audio
             OnDataAvailable((WasapiLoopbackCapture)sender, e);
         }
 
-        public virtual void OnDataAvailable(WasapiLoopbackCapture capture, WaveInEventArgs e)
+        protected virtual void OnDataAvailable(WasapiLoopbackCapture capture, WaveInEventArgs e)
         {
         }
 
