@@ -1,6 +1,6 @@
 ﻿using System.Management;
 
-namespace RemoteAudioServer.Utils
+namespace RemoteAudio.Server.Utils
 {
     public static class DeviceInfo
     {

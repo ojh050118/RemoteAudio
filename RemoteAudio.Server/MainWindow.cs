@@ -1,5 +1,5 @@
-namespace RemoteAudioServer;
-using RemoteAudioServer.Networking;
+namespace RemoteAudio.Server;
+using RemoteAudio.Server.Networking;
 
 public partial class MainWindow : Form
 {

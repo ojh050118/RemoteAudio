@@ -1,4 +1,4 @@
-﻿namespace RemoteAudioServer.Networking
+﻿namespace RemoteAudio.Server.Networking
 {
     public class HostInfo
     {

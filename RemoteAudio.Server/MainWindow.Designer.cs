@@ -1,4 +1,4 @@
-﻿namespace RemoteAudioServer;
+﻿namespace RemoteAudio.Server;
 
 partial class MainWindow
 {

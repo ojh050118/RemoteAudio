@@ -1,4 +1,4 @@
-namespace RemoteAudioServer;
+namespace RemoteAudio.Server;
 
 static class Program
 {

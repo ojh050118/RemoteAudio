@@ -1,6 +1,6 @@
 ﻿using NAudio.Wave;
 
-namespace RemoteAudioServer.Audio
+namespace RemoteAudio.Server.Audio
 {
     public class AudioCapturer : IDisposable
     {

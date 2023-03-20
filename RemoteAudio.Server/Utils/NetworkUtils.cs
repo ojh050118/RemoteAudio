@@ -1,7 +1,7 @@
 ﻿using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace RemoteAudioServer.Utils
+namespace RemoteAudio.Server.Utils
 {
     public static class NetworkUtils
     {

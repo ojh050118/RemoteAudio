@@ -1,10 +1,10 @@
 ﻿using NAudio.Wave;
-using RemoteAudioServer.Audio;
-using RemoteAudioServer.Utils;
+using RemoteAudio.Server.Audio;
+using RemoteAudio.Server.Utils;
 using System.Net;
 using System.Net.Sockets;
 
-namespace RemoteAudioServer.Networking
+namespace RemoteAudio.Server.Networking
 {
     public class UdpAudioServer : AudioCapturer
     {

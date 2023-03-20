@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using RemoteAudioServer.Utils;
+using RemoteAudio.Server.Utils;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace RemoteAudioServer.Networking
+namespace RemoteAudio.Server.Networking
 {
     public class BrodcastingController
     {
