@@ -3,6 +3,8 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+/.vs/
+*.v1
 *.v2
 *.suo
 *.user

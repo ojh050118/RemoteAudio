@@ -6,6 +6,6 @@
         public string DeviceName { get; set; }
         public string OS { get; set; }
         public string Address { get; set; }
-
+        public string MultiCastAddress = UdpAudioServer.MultiCastAddress;
     }
 }

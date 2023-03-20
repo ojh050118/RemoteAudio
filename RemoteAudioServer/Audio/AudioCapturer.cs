@@ -1,41 +1,36 @@
 ﻿using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RemoteAudioServer.Audio
 {
     public class AudioCapturer : IDisposable
     {
-        private readonly WasapiLoopbackCapture waveIn;
-        private readonly  WaveFormat format;
+        protected readonly WaveIn WaveIn;
+        protected readonly WaveFormat Format;
 
         public AudioCapturer()
         {
-            waveIn = new WasapiLoopbackCapture();
-            format = waveIn.WaveFormat;
-            waveIn.DataAvailable += onDavaAvailable;
+            WaveIn = new WaveIn();
+            Format = WaveIn.WaveFormat;
+            WaveIn.DataAvailable += onDavaAvailable;
         }
 
-        public void Start() => waveIn.StartRecording();
+        public void Start() => WaveIn.StartRecording();
 
-        public void Stop() => waveIn.StopRecording();
+        public void Stop() => WaveIn.StopRecording();
 
         private void onDavaAvailable(object sender, WaveInEventArgs e)
         {
-            OnDataAvailable((WasapiLoopbackCapture)sender, e);
+            OnDataAvailable(WaveIn, e);
         }
 
-        protected virtual void OnDataAvailable(WasapiLoopbackCapture capture, WaveInEventArgs e)
+        protected virtual void OnDataAvailable(WaveIn capture, WaveInEventArgs e)
         {
         }
 
         public void Dispose()
         {
-            waveIn.StopRecording();
-            waveIn.Dispose();
+            WaveIn.StopRecording();
+            WaveIn.Dispose();
         }
     }
 }
