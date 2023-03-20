@@ -10,19 +10,15 @@ public partial class MainWindow : Form
     public MainWindow()
     {
         InitializeComponent();
-        DeviceInfo.Text = $"PC Á¤º¸: {Utils.DeviceInfo.DeviceName}, {Utils.DeviceInfo.OS}";
+        DeviceInfo.Text = $"PC ì •ë³´: {Utils.DeviceInfo.DeviceName}, {Utils.DeviceInfo.OS}";
 
         initializeComponent();
-
-        AudioCapturer capturer = new AudioCapturer();
-        capturer.Start();
-        
     }
 
     private void initializeComponent()
     {
         ToolTip toolTip = new ToolTip();
-        toolTip.SetToolTip(DeviceInfo, "Å¬¶óÀÌ¾ğÆ®¿¡¼­ ÄÄÇ»ÅÍ¸¦ ±¸ºĞÇÒ¶§ »ç¿ëÇÕ´Ï´Ù.");
+        toolTip.SetToolTip(DeviceInfo, "í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì»´í“¨í„°ë¥¼ êµ¬ë¶„í• ë•Œ ì‚¬ìš©í•©ë‹ˆë‹¤.");
 
         UdpAudioServer server = new UdpAudioServer(PORT);
         server.Start();
