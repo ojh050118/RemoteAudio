@@ -10,11 +10,17 @@ namespace RemoteAudioServer.Networking
         private UdpClient server;
         private int port;
 
+		private int sequenceNumber;
+		private uint timestamp;
+
+		private IPAddress address;
 
         public UdpAudioServer(int port)
         {
             server = new UdpClient(port);
-            server.EnableBroadcast = true;
+            address = IPAddress.Parse(NetworkUtils.GetPrimaryIPv4Address());
+			server.JoinMultiCastGroup(address);
+			server.Ttl = 1;
 
             this.port = port;
         }
@@ -23,7 +29,19 @@ namespace RemoteAudioServer.Networking
         {
             base.OnDataAvailable(capture, e);
 
-            server.Send(e.Buffer.ToList().GetRange(0,1500).ToArray(), 1500, new IPEndPoint(IPAddress.Broadcast, port));
+			sendAudio(e.Buffer);
         }
+
+		private void sendAudio(byte[] audioData)
+		{
+			timestamp += (uint)(audioData.Length / 2);
+			var packet = NetworkUtils.BuildRTPPacket(sequenceNumber, timestamp);
+			
+			Array.Copy(audioData, 0, packet, NetworkUtils.RTP_HEADER_SIZE, packet.Length);
+
+			server.Send(packet, NetworkUtils.RTP_HEADER_SIZE + audioData.Length, new IPEndPoint(address, port));
+			
+			sequenceNumber++;
+		}
     }
 }
