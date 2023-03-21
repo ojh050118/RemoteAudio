@@ -18,11 +18,23 @@ public partial class MainWindow : Form
         ToolTip toolTip = new ToolTip();
         toolTip.SetToolTip(DeviceInfo, "클라이언트에서 컴퓨터를 구분할때 사용합니다.");
 
+        ProgressBar.Maximum = 255;
+
         UdpAudioServer server = new UdpAudioServer(PORT);
         server.Start();
     }
 
     private void label1_Click(object sender, EventArgs e)
     {
+    }
+
+    private void MainWindow_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void ProgressBar_Click(object sender, EventArgs e)
+    {
+
     }
 }

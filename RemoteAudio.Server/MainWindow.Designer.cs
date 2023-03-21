@@ -34,6 +34,7 @@ partial class MainWindow
             this.SettingsButton = new System.Windows.Forms.Button();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,12 +85,21 @@ partial class MainWindow
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(31, 17);
             this.toolStripStatusLabel1.Text = "준비";
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(16, 408);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(760, 23);
+            this.ProgressBar.TabIndex = 4;
+            this.ProgressBar.Click += new System.EventHandler(this.ProgressBar_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1008, 473);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.DeviceDescription);
@@ -97,6 +107,7 @@ partial class MainWindow
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "MainWindow";
             this.Text = "Remote Audio";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.StatusStrip.ResumeLayout(false);
             this.StatusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -111,4 +122,5 @@ partial class MainWindow
     private Button SettingsButton;
     private StatusStrip StatusStrip;
     private ToolStripStatusLabel toolStripStatusLabel1;
+    public ProgressBar ProgressBar;
 }

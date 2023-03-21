@@ -4,12 +4,14 @@ namespace RemoteAudio.Server.Audio
 {
     public class AudioCapturer : IDisposable
     {
-        protected readonly WaveIn WaveIn;
+        protected readonly WasapiLoopbackCapture WaveIn;
         protected readonly WaveFormat Format;
+
+        public Action<WasapiLoopbackCapture, WaveInEventArgs> OnDataReceived;
 
         public AudioCapturer()
         {
-            WaveIn = new WaveIn();
+            WaveIn = new WasapiLoopbackCapture();
             Format = WaveIn.WaveFormat;
             WaveIn.DataAvailable += onDavaAvailable;
         }
@@ -20,10 +22,11 @@ namespace RemoteAudio.Server.Audio
 
         private void onDavaAvailable(object sender, WaveInEventArgs e)
         {
+            OnDataReceived?.Invoke(WaveIn, e);
             OnDataAvailable(WaveIn, e);
         }
 
-        protected virtual void OnDataAvailable(WaveIn capture, WaveInEventArgs e)
+        protected virtual void OnDataAvailable(WasapiLoopbackCapture capture, WaveInEventArgs e)
         {
         }
 

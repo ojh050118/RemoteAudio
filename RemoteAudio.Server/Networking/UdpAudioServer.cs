@@ -21,17 +21,16 @@ namespace RemoteAudio.Server.Networking
 
         public UdpAudioServer(int port)
         {
-            server = new UdpClient(port);
             address = IPAddress.Parse(MultiCastAddress);
+
+            server = new UdpClient(port);
             server.JoinMulticastGroup(address);
             server.Ttl = 1;
-
-            WaveIn.BufferMilliseconds = 50;
 
             this.port = port;
         }
 
-        protected override void OnDataAvailable(WaveIn capture, WaveInEventArgs e)
+        protected override void OnDataAvailable(WasapiLoopbackCapture capture, WaveInEventArgs e)
         {
             base.OnDataAvailable(capture, e);
 
@@ -45,6 +44,7 @@ namespace RemoteAudio.Server.Networking
 
             Array.Copy(audioData, 0, packet, NetworkUtils.RTP_HEADER_SIZE, length);
 
+            // Todo: 오디오 데이터를 여러개의 RTP패킷으로 나누어 전송
             server.Send(packet, NetworkUtils.RTP_HEADER_SIZE + length, new IPEndPoint(address, port));
 
             sequenceNumber++;
