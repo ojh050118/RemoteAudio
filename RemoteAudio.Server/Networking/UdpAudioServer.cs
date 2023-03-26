@@ -11,12 +11,13 @@ namespace RemoteAudio.Server.Networking
         private UdpClient server;
         private int port;
 
-        private int sequenceNumber;
-        private uint timestamp;
+        private RTPPacketData data;
 
         private IPAddress address;
 
         public const string MultiCastAddress = "229.1.1.229";
+
+        private readonly Random random;
 
 
         public UdpAudioServer(int port)
@@ -27,6 +28,9 @@ namespace RemoteAudio.Server.Networking
             server.JoinMulticastGroup(address);
             server.Ttl = 1;
 
+            data = new RTPPacketData();
+            random = new Random();
+
             this.port = port;
         }
 
@@ -34,20 +38,14 @@ namespace RemoteAudio.Server.Networking
         {
             base.OnDataAvailable(capture, e);
 
-            sendAudio(e.Buffer, e.BytesRecorded);
+            sendAudio(e.Buffer);
         }
 
-        private void sendAudio(byte[] audioData, int length)
+        private void sendAudio(byte[] audioData)
         {
-            timestamp += (uint)(audioData.Length / 2);
-            var packet = NetworkUtils.BuildRTPPacket(sequenceNumber, timestamp);
-
-            Array.Copy(audioData, 0, packet, NetworkUtils.RTP_HEADER_SIZE, length);
-
-            // Todo: 오디오 데이터를 여러개의 RTP패킷으로 나누어 전송
-            server.Send(packet, NetworkUtils.RTP_HEADER_SIZE + length, new IPEndPoint(address, port));
-
-            sequenceNumber++;
+            data = server.SendRtpPacket(audioData, 0, data, new IPEndPoint(address, port));
+            data.SequenceNumber++;
+            data.Ssrc = (uint)random.NextInt64(0, uint.MaxValue);
         }
     }
 }
