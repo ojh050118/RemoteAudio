@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.hostListView = new System.Windows.Forms.ListView();
             this.settingsButton = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -35,14 +37,18 @@
             this.deviceInfo = new System.Windows.Forms.Label();
             this.connectButton = new System.Windows.Forms.Button();
             this.disconnectButton = new System.Windows.Forms.Button();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ctx = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.searchButton = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // hostListView
             // 
             this.hostListView.Location = new System.Drawing.Point(679, 12);
+            this.hostListView.MultiSelect = false;
             this.hostListView.Name = "hostListView";
-            this.hostListView.Size = new System.Drawing.Size(317, 401);
+            this.hostListView.Size = new System.Drawing.Size(317, 366);
             this.hostListView.TabIndex = 0;
             this.hostListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -91,6 +97,7 @@
             this.connectButton.TabIndex = 4;
             this.connectButton.Text = "연결";
             this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // disconnectButton
             // 
@@ -102,11 +109,38 @@
             this.disconnectButton.Text = "연결 해제";
             this.disconnectButton.UseVisualStyleBackColor = true;
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon.BalloonTipText = "테스트 알림입니다.";
+            this.notifyIcon.BalloonTipTitle = "Remote Audio Client";
+            this.notifyIcon.ContextMenuStrip = this.ctx;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "알림";
+            this.notifyIcon.Visible = true;
+            // 
+            // ctx
+            // 
+            this.ctx.Name = "ctx";
+            this.ctx.Size = new System.Drawing.Size(99, 26);
+            // 
+            // searchButton
+            // 
+            this.searchButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchButton.Location = new System.Drawing.Point(679, 384);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(317, 29);
+            this.searchButton.TabIndex = 6;
+            this.searchButton.Text = "호스트 검색";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 473);
+            this.Controls.Add(this.searchButton);
             this.Controls.Add(this.disconnectButton);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.deviceInfo);
@@ -115,7 +149,6 @@
             this.Controls.Add(this.hostListView);
             this.Name = "MainWindow";
             this.Text = "Remote Audio Client";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -132,5 +165,8 @@
         private Label deviceInfo;
         private Button connectButton;
         private Button disconnectButton;
+        private NotifyIcon notifyIcon;
+        private Button searchButton;
+        private ContextMenuStrip ctx;
     }
 }

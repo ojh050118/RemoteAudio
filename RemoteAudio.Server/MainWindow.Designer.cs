@@ -38,6 +38,8 @@ partial class MainWindow
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.Timer = new System.Windows.Forms.Timer(this.components);
+            this.startButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,13 +52,12 @@ partial class MainWindow
             this.deviceInfo.Size = new System.Drawing.Size(104, 32);
             this.deviceInfo.TabIndex = 0;
             this.deviceInfo.Text = "PC 정보:";
-            this.deviceInfo.Click += new System.EventHandler(this.label1_Click);
             // 
             // deviceDescription
             // 
             this.deviceDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.deviceDescription.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.deviceDescription.Location = new System.Drawing.Point(782, 408);
+            this.deviceDescription.Location = new System.Drawing.Point(460, 408);
             this.deviceDescription.Name = "deviceDescription";
             this.deviceDescription.PlaceholderText = "설명";
             this.deviceDescription.Size = new System.Drawing.Size(214, 29);
@@ -90,13 +91,12 @@ partial class MainWindow
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(16, 408);
+            this.progressBar.Location = new System.Drawing.Point(12, 408);
             this.progressBar.Maximum = 10000;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(760, 23);
+            this.progressBar.Size = new System.Drawing.Size(442, 29);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 4;
-            this.progressBar.Click += new System.EventHandler(this.ProgressBar_Click);
             // 
             // Timer
             // 
@@ -104,12 +104,37 @@ partial class MainWindow
             this.Timer.Interval = 50;
             this.Timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.startButton.Location = new System.Drawing.Point(841, 408);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(155, 29);
+            this.startButton.TabIndex = 5;
+            this.startButton.Text = "시작";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Enabled = false;
+            this.stopButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.stopButton.Location = new System.Drawing.Point(680, 408);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(155, 29);
+            this.stopButton.TabIndex = 6;
+            this.stopButton.Text = "중지";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1008, 473);
+            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.settingsButton);
@@ -118,7 +143,6 @@ partial class MainWindow
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "MainWindow";
             this.Text = "Remote Audio";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -135,4 +159,6 @@ partial class MainWindow
     private ToolStripStatusLabel statusText;
     private System.Windows.Forms.Timer Timer;
     private ProgressBar progressBar;
+    private Button startButton;
+    private Button stopButton;
 }

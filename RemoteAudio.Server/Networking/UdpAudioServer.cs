@@ -9,16 +9,13 @@ namespace RemoteAudio.Server.Networking
     public class UdpAudioServer : AudioCapturer
     {
         private UdpClient server;
+        private IPAddress address;
         private int port;
 
         private RTPPacketData data;
-
-        private IPAddress address;
-
-        public const string MultiCastAddress = "229.1.1.229";
-
         private readonly Random random;
 
+        public const string MultiCastAddress = "229.1.1.229";
 
         public UdpAudioServer(int port)
         {

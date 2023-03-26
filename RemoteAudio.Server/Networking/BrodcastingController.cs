@@ -10,8 +10,7 @@ namespace RemoteAudio.Server.Networking
     {
         private int port;
 
-        private HostInfo hostInfo;
-        private Thread loop;
+        public HostInfo HostInfo;
 
         private UdpClient brodcastClient;
 
@@ -20,9 +19,9 @@ namespace RemoteAudio.Server.Networking
             brodcastClient = new UdpClient(port);
             brodcastClient.EnableBroadcast = true;
 
-            hostInfo = new HostInfo
+            HostInfo = new HostInfo
             {
-                Provider = "Remote Audio",
+                Provider = "Remote Audio Host",
                 DeviceName = DeviceInfo.DeviceName,
                 OS = DeviceInfo.OS,
                 Address = NetworkUtils.GetPrimaryIPv4Address()
@@ -33,7 +32,7 @@ namespace RemoteAudio.Server.Networking
 
         public void Brodcast()
         {
-            string info = JsonConvert.SerializeObject(hostInfo);
+            string info = JsonConvert.SerializeObject(HostInfo);
 
             IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, port);
 
@@ -42,7 +41,7 @@ namespace RemoteAudio.Server.Networking
             brodcastClient.Send(data, data.Length, broadcast);
         }
 
-        public bool ReceiveBrodcasting()
+        public bool ReceiveBrodcasting(bool brodcast = false)
         {
             try
             {
@@ -50,7 +49,8 @@ namespace RemoteAudio.Server.Networking
 
                 var data = brodcastClient.Receive(ref broadcast);
 
-                Brodcast();
+                if (brodcast)
+                    Brodcast();
 
                 return true;
             }
@@ -58,29 +58,6 @@ namespace RemoteAudio.Server.Networking
             {
                 return false;
             }
-        }
-
-        public void StartReceiveBrodcastingLoop()
-        {
-            Thread thread = loop = new Thread(() =>
-            {
-                try
-                {
-                    while (true)
-                    {
-                        ReceiveBrodcasting();
-                    }
-                }
-                catch
-                {
-                }
-            });
-        }
-
-        public void StopReceiveBrodcastingLoop()
-        {
-            if (loop != null)
-                loop.Interrupt();
         }
     }
 }
