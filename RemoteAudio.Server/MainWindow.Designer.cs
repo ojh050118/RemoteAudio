@@ -16,6 +16,7 @@ partial class MainWindow
         if (disposing && (components != null))
         {
             components.Dispose();
+            Server.Dispose();
         }
 
         base.Dispose(disposing);
@@ -29,69 +30,79 @@ partial class MainWindow
     /// </summary>
     private void InitializeComponent()
     {
-            this.DeviceInfo = new System.Windows.Forms.Label();
-            this.DeviceDescription = new System.Windows.Forms.TextBox();
-            this.SettingsButton = new System.Windows.Forms.Button();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.StatusStrip.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.deviceInfo = new System.Windows.Forms.Label();
+            this.deviceDescription = new System.Windows.Forms.TextBox();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.Timer = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // DeviceInfo
+            // deviceInfo
             // 
-            this.DeviceInfo.AutoSize = true;
-            this.DeviceInfo.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DeviceInfo.Location = new System.Drawing.Point(12, 44);
-            this.DeviceInfo.Name = "DeviceInfo";
-            this.DeviceInfo.Size = new System.Drawing.Size(104, 32);
-            this.DeviceInfo.TabIndex = 0;
-            this.DeviceInfo.Text = "PC 정보:";
-            this.DeviceInfo.Click += new System.EventHandler(this.label1_Click);
+            this.deviceInfo.AutoSize = true;
+            this.deviceInfo.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deviceInfo.Location = new System.Drawing.Point(12, 44);
+            this.deviceInfo.Name = "deviceInfo";
+            this.deviceInfo.Size = new System.Drawing.Size(104, 32);
+            this.deviceInfo.TabIndex = 0;
+            this.deviceInfo.Text = "PC 정보:";
+            this.deviceInfo.Click += new System.EventHandler(this.label1_Click);
             // 
-            // DeviceDescription
+            // deviceDescription
             // 
-            this.DeviceDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeviceDescription.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DeviceDescription.Location = new System.Drawing.Point(782, 408);
-            this.DeviceDescription.Name = "DeviceDescription";
-            this.DeviceDescription.PlaceholderText = "설명";
-            this.DeviceDescription.Size = new System.Drawing.Size(214, 29);
-            this.DeviceDescription.TabIndex = 1;
+            this.deviceDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.deviceDescription.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deviceDescription.Location = new System.Drawing.Point(782, 408);
+            this.deviceDescription.Name = "deviceDescription";
+            this.deviceDescription.PlaceholderText = "설명";
+            this.deviceDescription.Size = new System.Drawing.Size(214, 29);
+            this.deviceDescription.TabIndex = 1;
             // 
-            // SettingsButton
+            // settingsButton
             // 
-            this.SettingsButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SettingsButton.Location = new System.Drawing.Point(12, 12);
-            this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(75, 29);
-            this.SettingsButton.TabIndex = 2;
-            this.SettingsButton.Text = "설정";
-            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.settingsButton.Location = new System.Drawing.Point(12, 12);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(75, 29);
+            this.settingsButton.TabIndex = 2;
+            this.settingsButton.Text = "설정";
+            this.settingsButton.UseVisualStyleBackColor = true;
             // 
-            // StatusStrip
+            // statusStrip
             // 
-            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 451);
-            this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(1008, 22);
-            this.StatusStrip.TabIndex = 3;
-            this.StatusStrip.Text = "statusStrip1";
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusText});
+            this.statusStrip.Location = new System.Drawing.Point(0, 451);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1008, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // statusText
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(31, 17);
-            this.toolStripStatusLabel1.Text = "준비";
+            this.statusText.Name = "statusText";
+            this.statusText.Size = new System.Drawing.Size(31, 17);
+            this.statusText.Text = "준비";
             // 
-            // ProgressBar
+            // progressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(16, 408);
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(760, 23);
-            this.ProgressBar.TabIndex = 4;
-            this.ProgressBar.Click += new System.EventHandler(this.ProgressBar_Click);
+            this.progressBar.Location = new System.Drawing.Point(16, 408);
+            this.progressBar.Maximum = 10000;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(760, 23);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 4;
+            this.progressBar.Click += new System.EventHandler(this.ProgressBar_Click);
+            // 
+            // Timer
+            // 
+            this.Timer.Enabled = true;
+            this.Timer.Interval = 50;
+            this.Timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // MainWindow
             // 
@@ -99,17 +110,17 @@ partial class MainWindow
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1008, 473);
-            this.Controls.Add(this.ProgressBar);
-            this.Controls.Add(this.StatusStrip);
-            this.Controls.Add(this.SettingsButton);
-            this.Controls.Add(this.DeviceDescription);
-            this.Controls.Add(this.DeviceInfo);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.settingsButton);
+            this.Controls.Add(this.deviceDescription);
+            this.Controls.Add(this.deviceInfo);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "MainWindow";
             this.Text = "Remote Audio";
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            this.StatusStrip.ResumeLayout(false);
-            this.StatusStrip.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,10 +128,11 @@ partial class MainWindow
 
     #endregion
 
-    private Label DeviceInfo;
-    private TextBox DeviceDescription;
-    private Button SettingsButton;
-    private StatusStrip StatusStrip;
-    private ToolStripStatusLabel toolStripStatusLabel1;
-    public ProgressBar ProgressBar;
+    private Label deviceInfo;
+    private TextBox deviceDescription;
+    private Button settingsButton;
+    private StatusStrip statusStrip;
+    private ToolStripStatusLabel statusText;
+    private System.Windows.Forms.Timer Timer;
+    private ProgressBar progressBar;
 }

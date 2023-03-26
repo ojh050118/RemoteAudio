@@ -28,71 +28,96 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.StatusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.DeviceInfo = new System.Windows.Forms.Label();
-            this.StatusStrip.SuspendLayout();
+            this.hostListView = new System.Windows.Forms.ListView();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.deviceInfo = new System.Windows.Forms.Label();
+            this.connectButton = new System.Windows.Forms.Button();
+            this.disconnectButton = new System.Windows.Forms.Button();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView1
+            // hostListView
             // 
-            this.listView1.Location = new System.Drawing.Point(679, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(317, 428);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.hostListView.Location = new System.Drawing.Point(679, 12);
+            this.hostListView.Name = "hostListView";
+            this.hostListView.Size = new System.Drawing.Size(317, 401);
+            this.hostListView.TabIndex = 0;
+            this.hostListView.UseCompatibleStateImageBehavior = false;
             // 
-            // button1
+            // settingsButton
             // 
-            this.button1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 29);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Settings";
-            this.button1.UseVisualStyleBackColor = true;
+            this.settingsButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.settingsButton.Location = new System.Drawing.Point(12, 12);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(75, 29);
+            this.settingsButton.TabIndex = 1;
+            this.settingsButton.Text = "설정";
+            this.settingsButton.UseVisualStyleBackColor = true;
             // 
-            // StatusStrip
+            // statusStrip
             // 
-            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.StatusText});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 451);
-            this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(1008, 22);
-            this.StatusStrip.TabIndex = 2;
-            this.StatusStrip.Text = "statusStrip1";
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusText});
+            this.statusStrip.Location = new System.Drawing.Point(0, 451);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1008, 22);
+            this.statusStrip.TabIndex = 2;
+            this.statusStrip.Text = "statusStrip1";
             // 
-            // StatusText
+            // statusText
             // 
-            this.StatusText.Name = "StatusText";
-            this.StatusText.Size = new System.Drawing.Size(71, 17);
-            this.StatusText.Text = "연결 준비됨";
+            this.statusText.Name = "statusText";
+            this.statusText.Size = new System.Drawing.Size(71, 17);
+            this.statusText.Text = "연결 준비됨";
             // 
-            // DeviceInfo
+            // deviceInfo
             // 
-            this.DeviceInfo.AutoSize = true;
-            this.DeviceInfo.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DeviceInfo.Location = new System.Drawing.Point(12, 44);
-            this.DeviceInfo.Name = "DeviceInfo";
-            this.DeviceInfo.Size = new System.Drawing.Size(104, 32);
-            this.DeviceInfo.TabIndex = 3;
-            this.DeviceInfo.Text = "PC 정보:";
+            this.deviceInfo.AutoSize = true;
+            this.deviceInfo.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deviceInfo.Location = new System.Drawing.Point(12, 44);
+            this.deviceInfo.Name = "deviceInfo";
+            this.deviceInfo.Size = new System.Drawing.Size(104, 32);
+            this.deviceInfo.TabIndex = 3;
+            this.deviceInfo.Text = "PC 정보:";
+            // 
+            // connectButton
+            // 
+            this.connectButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.connectButton.Location = new System.Drawing.Point(841, 419);
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(155, 29);
+            this.connectButton.TabIndex = 4;
+            this.connectButton.Text = "연결";
+            this.connectButton.UseVisualStyleBackColor = true;
+            // 
+            // disconnectButton
+            // 
+            this.disconnectButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.disconnectButton.Location = new System.Drawing.Point(679, 419);
+            this.disconnectButton.Name = "disconnectButton";
+            this.disconnectButton.Size = new System.Drawing.Size(155, 29);
+            this.disconnectButton.TabIndex = 5;
+            this.disconnectButton.Text = "연결 해제";
+            this.disconnectButton.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 473);
-            this.Controls.Add(this.DeviceInfo);
-            this.Controls.Add(this.StatusStrip);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.disconnectButton);
+            this.Controls.Add(this.connectButton);
+            this.Controls.Add(this.deviceInfo);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.settingsButton);
+            this.Controls.Add(this.hostListView);
             this.Name = "MainWindow";
             this.Text = "Remote Audio Client";
-            this.StatusStrip.ResumeLayout(false);
-            this.StatusStrip.PerformLayout();
+            this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,10 +125,12 @@
 
         #endregion
 
-        private ListView listView1;
-        private Button button1;
-        private StatusStrip StatusStrip;
-        private ToolStripStatusLabel StatusText;
-        private Label DeviceInfo;
+        private ListView hostListView;
+        private Button settingsButton;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel statusText;
+        private Label deviceInfo;
+        private Button connectButton;
+        private Button disconnectButton;
     }
 }
