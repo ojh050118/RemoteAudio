@@ -4,15 +4,28 @@ namespace RemoteAudio.Server.Audio
 {
     public class AudioCapturer : IDisposable
     {
-        protected readonly WasapiLoopbackCapture WaveIn;
-        protected readonly WaveFormat Format;
+        protected WasapiLoopbackCapture WaveIn { get; private set; }
+        public WaveFormat Format
+        {
+            get => waveFormat;
+            set
+            {
+                if (ReferenceEquals(waveFormat, value))
+                    return;
+
+                waveFormat = value;
+                WaveIn.WaveFormat = value;
+            }
+        }
+
+        private WaveFormat waveFormat;
 
         public Action<WasapiLoopbackCapture, WaveInEventArgs> OnDataReceived;
 
         public AudioCapturer()
         {
             WaveIn = new WasapiLoopbackCapture();
-            Format = WaveIn.WaveFormat;
+            waveFormat = WaveIn.WaveFormat;
             WaveIn.DataAvailable += onDavaAvailable;
         }
 
