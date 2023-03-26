@@ -9,7 +9,6 @@ public partial class MainWindow : Form
     public const int PORT = 6974;
 
     private BrodcastingController brodcasting;
-    private bool isRunning;
 
     private MMDevice defaultDevice;
 
@@ -39,7 +38,6 @@ public partial class MainWindow : Form
     {
         Server.Start();
 
-        isRunning = true;
         startButton.Enabled = false;
         stopButton.Enabled = true;
         deviceDescription.Enabled = false;
@@ -52,7 +50,6 @@ public partial class MainWindow : Form
     {
         Server.Stop();
 
-        isRunning = false;
         startButton.Enabled = true;
         stopButton.Enabled = false;
         deviceDescription.Enabled = true;

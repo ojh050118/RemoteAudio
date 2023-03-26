@@ -112,11 +112,15 @@ namespace RemoteAudio.Server.Utils
         }
     }
 
-    public struct RTPPacketData
+    public class RTPPacketData
     {
         public uint SequenceNumber;
         public uint Timestamp;
         public uint Ssrc;
+
+        public RTPPacketData()
+        {
+        }
 
         public RTPPacketData(uint sequenceNumber, uint timestamp, uint ssrc)
         {

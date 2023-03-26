@@ -41,10 +41,9 @@ namespace RemoteAudio.Client.Networking
         public void Brodcast()
         {
             string info = JsonConvert.SerializeObject(hostInfo);
+            var data = Encoding.UTF8.GetBytes(info);
 
             IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, port);
-
-            var data = Encoding.UTF8.GetBytes(info);
 
             broadcastClient.Send(data, data.Length, broadcast);
         }
