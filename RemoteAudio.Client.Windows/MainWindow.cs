@@ -13,17 +13,12 @@ namespace RemoteAudio.Client.Windows
             InitializeComponent();
 
             brodcasting = new BrodcastingController(PORT - 1);
-            brodcasting.HostListChanged += h =>
+            brodcasting.HostInfoReceived += h =>
             {
-                hostListView.Items.Clear();
-
-                foreach (var host in h)
+                hostListView.Items.Add(new ListViewItem
                 {
-                    hostListView.Items.Add(new ListViewItem
-                    {
-                        Text = $"{host.DeviceName}, {host.OS}, {host.Description}"
-                    });
-                }
+                    Text = $"{h.DeviceName}, {h.OS}, {h.Description}"
+                });
             };
         }
 
@@ -35,9 +30,7 @@ namespace RemoteAudio.Client.Windows
         private void searchButton_Click(object sender, EventArgs e)
         {
             brodcasting.Brodcast();
-            brodcasting.ReceiveBrodcastingLoop();
-
-
+            brodcasting.ReceiveBroadcast();
         }
     }
 }
