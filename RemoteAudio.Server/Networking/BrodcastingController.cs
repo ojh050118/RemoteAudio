@@ -12,12 +12,15 @@ namespace RemoteAudio.Server.Networking
 
         public HostInfo HostInfo;
 
-        private UdpClient brodcastClient;
+        private UdpClient broadcastClient;
+        private readonly CancellationTokenSource cancellationTokenSource;
 
         public BrodcastingController(int port)
         {
-            brodcastClient = new UdpClient(port);
-            brodcastClient.EnableBroadcast = true;
+            broadcastClient = new UdpClient(port);
+            broadcastClient.EnableBroadcast = true;
+
+            cancellationTokenSource = new CancellationTokenSource();
 
             HostInfo = new HostInfo
             {
@@ -33,30 +36,40 @@ namespace RemoteAudio.Server.Networking
         public void Brodcast()
         {
             string info = JsonConvert.SerializeObject(HostInfo);
-
-            IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, port);
-
             var data = Encoding.UTF8.GetBytes(info);
 
-            brodcastClient.Send(data, data.Length, broadcast);
+            IPEndPoint endpoint = new IPEndPoint(IPAddress.Broadcast, port);
+
+            broadcastClient.Send(data, data.Length, endpoint);
         }
 
-        public bool ReceiveBrodcasting(bool brodcast = false)
+        public void ReceiveBroadcast()
+        {
+            broadcastClient.BeginReceive(ReceiveCallback, null);
+        }
+
+        public void StopReceivingBroadcast()
+        {
+            cancellationTokenSource.Cancel();
+        }
+
+        private void ReceiveCallback(IAsyncResult ar)
         {
             try
             {
-                IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, port);
+                IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, port);
+                byte[] receivedBytes = broadcastClient.EndReceive(ar, ref remoteIpEndPoint);
+                string receivedMessage = Encoding.UTF8.GetString(receivedBytes);
 
-                var data = brodcastClient.Receive(ref broadcast);
+                HostInfo hostInfo = JsonConvert.DeserializeObject<HostInfo>(receivedMessage);
 
-                if (brodcast)
+                if (hostInfo.Provider != "Remote Audio Server")
                     Brodcast();
 
-                return true;
+                broadcastClient.BeginReceive(ReceiveCallback, null);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
             }
         }
     }

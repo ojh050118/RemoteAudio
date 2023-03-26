@@ -45,11 +45,7 @@ public partial class MainWindow : Form
         deviceDescription.Enabled = false;
         statusText.Text = "멀티캐스팅 중";
 
-        new Thread(() =>
-        {
-            while (isRunning)
-                brodcasting.ReceiveBrodcasting(true);
-        });
+        brodcasting.ReceiveBroadcast();
     }
 
     private void stopButton_Click(object sender, EventArgs e)
@@ -61,5 +57,7 @@ public partial class MainWindow : Form
         stopButton.Enabled = false;
         deviceDescription.Enabled = true;
         statusText.Text = "준비";
+
+        brodcasting.StopReceivingBroadcast();
     }
 }
