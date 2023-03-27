@@ -38,7 +38,7 @@ namespace RemoteAudio.Server.Networking
             string info = JsonConvert.SerializeObject(HostInfo);
             var data = Encoding.UTF8.GetBytes(info);
 
-            IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse("255.255.255.255"), port);
+            IPEndPoint endpoint = new IPEndPoint(IPAddress.Broadcast, port);
 
             broadcastClient.Send(data, data.Length, endpoint);
         }
