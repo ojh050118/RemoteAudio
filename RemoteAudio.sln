@@ -15,6 +15,8 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "RemoteAudio.Server.Windows 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteAudio.Server.Windows", "RemoteAudio.Server.Windows\RemoteAudio.Server.Windows\RemoteAudio.Server.Windows.csproj", "{039713B4-C7CC-417C-B096-3BD7726C530B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteAudio.Core", "RemoteAudio.Core\RemoteAudio.Core.csproj", "{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -199,6 +201,30 @@ Global
 		{039713B4-C7CC-417C-B096-3BD7726C530B}.Release|x64.Build.0 = Release|x64
 		{039713B4-C7CC-417C-B096-3BD7726C530B}.Release|x86.ActiveCfg = Release|x86
 		{039713B4-C7CC-417C-B096-3BD7726C530B}.Release|x86.Build.0 = Release|x86
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|arm64.Build.0 = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|x64.Build.0 = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Debug|x86.Build.0 = Debug|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|arm64.ActiveCfg = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|arm64.Build.0 = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|iPhone.Build.0 = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|x64.ActiveCfg = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|x64.Build.0 = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|x86.ActiveCfg = Release|Any CPU
+		{D1ACAC24-2534-4A86-872E-6FFBA7CD3035}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -40,6 +40,8 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.ctx = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.searchButton = new System.Windows.Forms.Button();
+            this.directConnectButton = new System.Windows.Forms.Button();
+            this.hostIPAddress = new System.Windows.Forms.TextBox();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +110,7 @@
             this.disconnectButton.TabIndex = 5;
             this.disconnectButton.Text = "연결 해제";
             this.disconnectButton.UseVisualStyleBackColor = true;
+            this.disconnectButton.Click += new System.EventHandler(this.disconnectButton_Click);
             // 
             // notifyIcon
             // 
@@ -122,7 +125,7 @@
             // ctx
             // 
             this.ctx.Name = "ctx";
-            this.ctx.Size = new System.Drawing.Size(99, 26);
+            this.ctx.Size = new System.Drawing.Size(61, 4);
             // 
             // searchButton
             // 
@@ -135,11 +138,35 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
+            // directConnectButton
+            // 
+            this.directConnectButton.Enabled = false;
+            this.directConnectButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.directConnectButton.Location = new System.Drawing.Point(209, 419);
+            this.directConnectButton.Name = "directConnectButton";
+            this.directConnectButton.Size = new System.Drawing.Size(155, 29);
+            this.directConnectButton.TabIndex = 7;
+            this.directConnectButton.Text = "직접 연결";
+            this.directConnectButton.UseVisualStyleBackColor = true;
+            this.directConnectButton.Click += new System.EventHandler(this.directConnectButton_Click);
+            // 
+            // hostIPAddress
+            // 
+            this.hostIPAddress.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.hostIPAddress.Location = new System.Drawing.Point(12, 419);
+            this.hostIPAddress.MaxLength = 100;
+            this.hostIPAddress.Name = "hostIPAddress";
+            this.hostIPAddress.PlaceholderText = "IP 주소";
+            this.hostIPAddress.Size = new System.Drawing.Size(191, 29);
+            this.hostIPAddress.TabIndex = 8;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 473);
+            this.Controls.Add(this.hostIPAddress);
+            this.Controls.Add(this.directConnectButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.disconnectButton);
             this.Controls.Add(this.connectButton);
@@ -168,5 +195,7 @@
         private NotifyIcon notifyIcon;
         private Button searchButton;
         private ContextMenuStrip ctx;
+        private Button directConnectButton;
+        private TextBox hostIPAddress;
     }
 }
