@@ -118,6 +118,7 @@ namespace RemoteAudio.Core.Utils
             var nextBit = () => random.Next(0, 256);
 
             return IPAddress.Parse($"{bit1}.{nextBit}.{nextBit}.{nextBit}");
+        }
     }
 
     public struct RTPPacketData
