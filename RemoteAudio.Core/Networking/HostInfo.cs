@@ -1,11 +1,13 @@
-﻿namespace RemoteAudio.Core.Networking
+﻿using RemoteAudio.Core.Utils;
+
+namespace RemoteAudio.Core.Networking
 {
     public class HostInfo : IEquatable<HostInfo>
     {
         public const string NAME = @"RemoteAudio";
 
         /// <summary>
-        /// 앱 이름. 패킷이 우리 것인지 구별하기 이해 사용됩니다.
+        /// 앱 이름. 패킷이 우리 것인지 구별하기 위해 사용됩니다.
         /// </summary>
         public string Name => NAME;
 
@@ -30,9 +32,9 @@
         public string Address { get; set; }
 
         /// <summary>
-        /// 멀티캐스트 할 주소.
+        /// 멀티캐스트를 할 주소.
         /// </summary>
-        public string MultiCastAddress = "229.1.1.229";
+        public string MultiCastAddress = NetworkUtils.GetRandomMulticastAddress().ToString();
 
         /// <summary>
         /// 자신의 설명.

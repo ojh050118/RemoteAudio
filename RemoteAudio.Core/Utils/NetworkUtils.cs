@@ -110,6 +110,14 @@ namespace RemoteAudio.Core.Utils
 
             return packetData;
         }
+
+        public static IPAddress GetRandomMulticastAddress()
+        {
+            var random = new Random();
+            var bit1 = random.Next(224, 240);
+            var nextBit = () => random.Next(0, 256);
+
+            return IPAddress.Parse($"{bit1}.{nextBit}.{nextBit}.{nextBit}");
     }
 
     public struct RTPPacketData
