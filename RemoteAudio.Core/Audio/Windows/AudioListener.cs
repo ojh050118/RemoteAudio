@@ -42,23 +42,28 @@ public class AudioListener : IDisposable
         udpClient.Close();
         waveOut.Stop();
         waveOut.Dispose();
-        udpClient.EndReceive(null, ref endPoint);
     }
 
     private void ReceiveCallback(IAsyncResult ar)
     {
-        var receiveBytes = udpClient.EndReceive(ar, ref endPoint);
-        var headerAndPayload = ar.AsyncState as Tuple<byte[], int>;
-        var buffer = new byte[headerAndPayload.Item1.Length + receiveBytes.Length];
+        try
+        {
+            var receiveBytes = udpClient.EndReceive(ar, ref endPoint);
+            var headerAndPayload = ar.AsyncState as Tuple<byte[], int>;
+            var buffer = new byte[headerAndPayload.Item1.Length + receiveBytes.Length];
 
-        Array.Copy(headerAndPayload.Item1, buffer, headerAndPayload.Item1.Length);
-        Array.Copy(receiveBytes, 0, buffer, headerAndPayload.Item1.Length, receiveBytes.Length);
+            Array.Copy(headerAndPayload.Item1, buffer, headerAndPayload.Item1.Length);
+            Array.Copy(receiveBytes, 0, buffer, headerAndPayload.Item1.Length, receiveBytes.Length);
 
-        // RTP 페이로드에 해당하는 데이터를 추출하여 재생
-        var payload = new byte[receiveBytes.Length - headerAndPayload.Item2];
-        Array.Copy(receiveBytes, headerAndPayload.Item2, payload, 0, payload.Length);
-        bufferedWaveProvider?.AddSamples(payload, 0, payload.Length);
+            // RTP 페이로드에 해당하는 데이터를 추출하여 재생
+            var payload = new byte[receiveBytes.Length - headerAndPayload.Item2];
+            Array.Copy(receiveBytes, headerAndPayload.Item2, payload, 0, payload.Length);
+            bufferedWaveProvider?.AddSamples(payload, 0, payload.Length);
 
-        udpClient.BeginReceive(ReceiveCallback, new Tuple<byte[], int>(receiveBytes, headerAndPayload.Item2));
+            udpClient.BeginReceive(ReceiveCallback, new Tuple<byte[], int>(receiveBytes, headerAndPayload.Item2));
+        }
+        catch
+        {
+        }
     }
 }

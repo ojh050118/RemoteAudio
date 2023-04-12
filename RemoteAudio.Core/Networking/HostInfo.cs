@@ -44,7 +44,11 @@ namespace RemoteAudio.Core.Networking
 
         public bool Equals(HostInfo h)
         {
-            return ServiceMode == h.ServiceMode && DeviceName == h.DeviceName && OS == h.OS && Address == h.Address && Description == h.Description;
+            return ServiceMode == h.ServiceMode &&
+                   DeviceName == h.DeviceName &&
+                   OS == h.OS &&
+                   Address == h.Address &&
+                   Description == h.Description;
         }
     }
 }

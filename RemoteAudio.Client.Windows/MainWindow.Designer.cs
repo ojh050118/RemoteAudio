@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.hostListView = new System.Windows.Forms.ListView();
+            this.deviceName = new System.Windows.Forms.ColumnHeader();
+            this.description = new System.Windows.Forms.ColumnHeader();
+            this.ipAddress = new System.Windows.Forms.ColumnHeader();
             this.settingsButton = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,12 +50,34 @@
             // 
             // hostListView
             // 
+            this.hostListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.deviceName,
+            this.description,
+            this.ipAddress});
+            this.hostListView.GridLines = true;
             this.hostListView.Location = new System.Drawing.Point(679, 12);
             this.hostListView.MultiSelect = false;
             this.hostListView.Name = "hostListView";
             this.hostListView.Size = new System.Drawing.Size(317, 366);
             this.hostListView.TabIndex = 0;
             this.hostListView.UseCompatibleStateImageBehavior = false;
+            this.hostListView.View = System.Windows.Forms.View.Details;
+            this.hostListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.hostListView_ItemSelectionChanged);
+            // 
+            // deviceName
+            // 
+            this.deviceName.Text = "PC 이름";
+            this.deviceName.Width = 117;
+            // 
+            // description
+            // 
+            this.description.Text = "설명";
+            this.description.Width = 100;
+            // 
+            // ipAddress
+            // 
+            this.ipAddress.Text = "IP 주소";
+            this.ipAddress.Width = 100;
             // 
             // settingsButton
             // 
@@ -92,6 +117,7 @@
             // 
             // connectButton
             // 
+            this.connectButton.Enabled = false;
             this.connectButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.connectButton.Location = new System.Drawing.Point(841, 419);
             this.connectButton.Name = "connectButton";
@@ -103,6 +129,7 @@
             // 
             // disconnectButton
             // 
+            this.disconnectButton.Enabled = false;
             this.disconnectButton.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.disconnectButton.Location = new System.Drawing.Point(679, 419);
             this.disconnectButton.Name = "disconnectButton";
@@ -197,5 +224,8 @@
         private ContextMenuStrip ctx;
         private Button directConnectButton;
         private TextBox hostIPAddress;
+        private ColumnHeader deviceName;
+        private ColumnHeader description;
+        private ColumnHeader ipAddress;
     }
 }

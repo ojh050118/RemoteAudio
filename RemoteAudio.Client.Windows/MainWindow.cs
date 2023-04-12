@@ -1,7 +1,7 @@
-using RemoteAudio.Core.Networking;
 using RemoteAudio.Core.Audio.Windows;
-using System.Net;
+using RemoteAudio.Core.Networking;
 using RemoteAudio.Core.Utils;
+using System.Net;
 
 namespace RemoteAudio.Client.Windows
 {
@@ -12,6 +12,8 @@ namespace RemoteAudio.Client.Windows
 
         private RemoteAudioBroadcastingController brodcasting;
         private AudioListener listener;
+
+        private HostInfo selected;
 
         public MainWindow()
         {
@@ -46,16 +48,27 @@ namespace RemoteAudio.Client.Windows
             brodcasting = new RemoteAudioBroadcastingController(PORT - 1, hostInfo, ServiceMode.Server);
             brodcasting.DataReceived += h =>
             {
-                hostListView.Items.Add(new ListViewItem
+                var item = new HostInfoListViewItem
                 {
-                    Text = $"{h.DeviceName}\n{h.Description}"
-                });
+                    Text = $"{h.DeviceName}\n{h.Description}",
+                    Current = h,
+                };
+                item.SubItems.AddRange(new[] { string.Empty, h.Description, h.Address });
+
+                hostListView.Items.Add(item);
             };
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
-            notifyIcon.ShowBalloonTip(5);
+            if (selected == null || listener != null)
+                return;
+
+            listener = new AudioListener(new IPEndPoint(IPAddress.Parse(selected.MultiCastAddress), PORT));
+            listener.Start();
+
+            connectButton.Enabled = false;
+            disconnectButton.Enabled = true;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -73,8 +86,22 @@ namespace RemoteAudio.Client.Windows
 
         private void disconnectButton_Click(object sender, EventArgs e)
         {
-            listener?.Stop();
+            listener?.Dispose();
             listener = null;
+
+            connectButton.Enabled = true;
+            disconnectButton.Enabled = false;
+        }
+
+        private class HostInfoListViewItem : ListViewItem
+        {
+            public HostInfo Current { get; init; }
+        }
+
+        private void hostListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            selected = (e.Item as HostInfoListViewItem).Current;
+            connectButton.Enabled = true;
         }
     }
 }

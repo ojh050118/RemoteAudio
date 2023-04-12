@@ -19,6 +19,7 @@ namespace RemoteAudio.Core.Networking
             : base(port)
         {
             EnableBroadcast = true;
+            Ttl = 10;
 
             cancellationTokenSource = new CancellationTokenSource();
             DataList = new List<T>();
@@ -60,7 +61,7 @@ namespace RemoteAudio.Core.Networking
                 T data = JsonConvert.DeserializeObject<T>(receivedMessage);
 
                 if (ReceiveCallback(data))
-                    DataReceived.Invoke(data);
+                    DataReceived?.Invoke(data);
 
                 BeginReceive(receiveCallback, null);
             }
