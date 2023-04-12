@@ -1,6 +1,7 @@
-using RemoteAudio.Client.Networking;
-using RemoteAudio.Client.Windows.Audio;
+using RemoteAudio.Core.Networking;
+using RemoteAudio.Core.Audio.Windows;
 using System.Net;
+using RemoteAudio.Core.Utils;
 
 namespace RemoteAudio.Client.Windows
 {
@@ -9,14 +10,16 @@ namespace RemoteAudio.Client.Windows
         public const int PORT = 6974;
         private IPAddress hostIP;
 
-        private BrodcastingController brodcasting;
+        private RemoteAudioBroadcastingController brodcasting;
         private AudioListener listener;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            deviceInfo.Text = $"PC 정보: {Utils.DeviceInfo.DeviceName}, {Utils.DeviceInfo.OS}";
+            var info = PlatformUtils.GetDeviceInfo();
+            deviceInfo.Text = $"PC 정보: {info.DeviceName}, {info.OS}";
+
             hostIPAddress.TextChanged += (s, e) =>
             {
                 if (IPAddress.TryParse(hostIPAddress.Text, out IPAddress ipAddress))
@@ -31,8 +34,17 @@ namespace RemoteAudio.Client.Windows
                 }
             };
 
-            brodcasting = new BrodcastingController(PORT - 1);
-            brodcasting.HostInfoReceived += h =>
+            var hostInfo = new HostInfo
+            {
+                ServiceMode = ServiceMode.Client,
+                DeviceName = info.DeviceName,
+                OS = info.OS,
+                Address = NetworkUtils.GetPrimaryIPv4Address(),
+                MultiCastAddress = string.Empty
+            };
+
+            brodcasting = new RemoteAudioBroadcastingController(PORT - 1, hostInfo, ServiceMode.Server);
+            brodcasting.DataReceived += h =>
             {
                 hostListView.Items.Add(new ListViewItem
                 {
@@ -48,7 +60,7 @@ namespace RemoteAudio.Client.Windows
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            brodcasting.Brodcast();
+            brodcasting.Broadcast();
             brodcasting.ReceiveBroadcast();
         }
 
