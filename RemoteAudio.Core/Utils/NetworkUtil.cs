@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace RemoteAudio.Core.Utils
 {
-    public static class NetworkUtils
+    public static class NetworkUtil
     {
         public const int RTP_HEADER_SIZE = 12;
         public const int RTP_VERSION = 2;

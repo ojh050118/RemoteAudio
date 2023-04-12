@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace RemoteAudio.Core.Utils
 {
-    public static class PlatformUtils
+    public static class PlatformUtil
     {
         public static IDeviceInfo GetDeviceInfo()
         {

@@ -19,7 +19,7 @@ namespace RemoteAudio.Client.Windows
         {
             InitializeComponent();
 
-            var info = PlatformUtils.GetDeviceInfo();
+            var info = PlatformUtil.GetDeviceInfo();
             deviceInfo.Text = $"PC Á¤º¸: {info.DeviceName}, {info.OS}";
 
             hostIPAddress.TextChanged += (s, e) =>
@@ -41,7 +41,7 @@ namespace RemoteAudio.Client.Windows
                 ServiceMode = ServiceMode.Client,
                 DeviceName = info.DeviceName,
                 OS = info.OS,
-                Address = NetworkUtils.GetPrimaryIPv4Address(),
+                Address = NetworkUtil.GetPrimaryIPv4Address(),
                 MultiCastAddress = string.Empty
             };
 

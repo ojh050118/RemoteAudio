@@ -18,7 +18,7 @@ public partial class MainWindow : Form
     {
         InitializeComponent();
 
-        var info = PlatformUtils.GetDeviceInfo();
+        var info = PlatformUtil.GetDeviceInfo();
         deviceInfo.Text = $"PC 정보: {info.DeviceName}, {info.OS}";
 
         MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
@@ -30,7 +30,7 @@ public partial class MainWindow : Form
             ServiceMode = ServiceMode.Server,
             DeviceName = info.DeviceName,
             OS = info.OS,
-            Address = NetworkUtils.GetPrimaryIPv4Address(),
+            Address = NetworkUtil.GetPrimaryIPv4Address(),
             MultiCastAddress = Server.MulticastIPAddress.ToString()
         };
 

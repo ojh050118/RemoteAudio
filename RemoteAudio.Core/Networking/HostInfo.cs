@@ -34,7 +34,7 @@ namespace RemoteAudio.Core.Networking
         /// <summary>
         /// 멀티캐스트를 할 주소.
         /// </summary>
-        public string MultiCastAddress = NetworkUtils.GetRandomMulticastAddress().ToString();
+        public string MultiCastAddress = NetworkUtil.GetRandomMulticastAddress().ToString();
 
         /// <summary>
         /// 자신의 설명.

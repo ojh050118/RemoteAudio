@@ -18,7 +18,7 @@ namespace RemoteAudio.Server.Networking
 
         public UdpAudioServer(int port)
         {
-            MulticastIPAddress = NetworkUtils.GetRandomMulticastAddress();
+            MulticastIPAddress = NetworkUtil.GetRandomMulticastAddress();
             server = new UdpClient(port);
             server.JoinMulticastGroup(MulticastIPAddress);
             server.Ttl = 1;
