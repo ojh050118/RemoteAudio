@@ -11,6 +11,10 @@ namespace RemoteAudio.Core.Utils
         public const int RTP_PAYLOAD_TYPE = 0;
         public const int MAX_PACKET_SIZE = 1500;
 
+        /// <summary>
+        /// 주로 사용하는 네트워크 인터페이스의 IPv4 주소를 가져옵니다.
+        /// </summary>
+        /// <returns>IPv4 주소</returns>
         public static string GetPrimaryIPv4Address()
         {
             string ipAddress = "";
@@ -84,6 +88,8 @@ namespace RemoteAudio.Core.Utils
             int dataSize = MAX_PACKET_SIZE - 12;
             int offset = 0;
 
+            // 이더넷 네트워크에서 전송할 수 있는 패킷의 크기는 1500바이트입니다.
+            // 1500바이트씩 나누어 패킷을 전송합니다.
             while (offset < audioData.Length)
             {
                 int remaining = audioData.Length - offset;
@@ -111,6 +117,10 @@ namespace RemoteAudio.Core.Utils
             return packetData;
         }
 
+        /// <summary>
+        /// 멀티캐스트 범위 내의 무작위 주소를 가져옵니다.
+        /// </summary>
+        /// <returns>무작위로 설정된 멀티캐스트 주소를 가진 객체.</returns>
         public static IPAddress GetRandomMulticastAddress()
         {
             var random = new Random();

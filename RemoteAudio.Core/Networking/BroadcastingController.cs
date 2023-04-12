@@ -10,6 +10,7 @@ namespace RemoteAudio.Core.Networking
         public int Port { get; }
 
         public T Data;
+
         public List<T> DataList { get; }
         public event Action<T> DataReceived;
 
@@ -30,12 +31,22 @@ namespace RemoteAudio.Core.Networking
 
         public virtual void Broadcast()
         {
-            string info = JsonConvert.SerializeObject(Data);
-            var data = Encoding.UTF8.GetBytes(info);
+            string json = JsonConvert.SerializeObject(Data);
+            var byteData = Encoding.UTF8.GetBytes(json);
 
             IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, Port);
 
-            Send(data, data.Length, broadcast);
+            Send(byteData, byteData.Length, broadcast);
+        }
+
+        public virtual void Broadcast(T data)
+        {
+            string json = JsonConvert.SerializeObject(data);
+            var byteData = Encoding.UTF8.GetBytes(json);
+
+            IPEndPoint broadcast = new IPEndPoint(IPAddress.Broadcast, Port);
+
+            Send(byteData, byteData.Length, broadcast);
         }
 
         public virtual void ReceiveBroadcast()
@@ -48,6 +59,11 @@ namespace RemoteAudio.Core.Networking
             cancellationTokenSource.Cancel();
         }
 
+        /// <summary>
+        /// 패킷을 수신 했을 때 호줄됩니다.
+        /// </summary>
+        /// <param name="data">수신한 데이터.</param>
+        /// <returns>데이터를 올바르게 수신했는지 여부.</returns>
         protected abstract bool ReceiveCallback(T data);
 
         private void receiveCallback(IAsyncResult ar)
