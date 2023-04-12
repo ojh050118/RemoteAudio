@@ -27,7 +27,7 @@ namespace RemoteAudio.Core.Networking
             Port = port;
         }
 
-        public virtual void Brodcast()
+        public virtual void Broadcast()
         {
             string info = JsonConvert.SerializeObject(Data);
             var data = Encoding.UTF8.GetBytes(info);

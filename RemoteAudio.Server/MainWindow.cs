@@ -1,6 +1,8 @@
 namespace RemoteAudio.Server;
 
 using NAudio.CoreAudioApi;
+using RemoteAudio.Core.Networking;
+using RemoteAudio.Core.Utils;
 using RemoteAudio.Server.Networking;
 
 public partial class MainWindow : Form
@@ -8,7 +10,7 @@ public partial class MainWindow : Form
     public UdpAudioServer Server;
     public const int PORT = 6974;
 
-    private BrodcastingController brodcasting;
+    private RemoteAudioBroadcastingController brodcasting;
 
     private MMDevice defaultDevice;
 
@@ -16,13 +18,23 @@ public partial class MainWindow : Form
     {
         InitializeComponent();
 
-        deviceInfo.Text = $"PC 정보: {Utils.DeviceInfo.DeviceName}, {Utils.DeviceInfo.OS}";
+        var info = PlatformUtils.GetDeviceInfo();
+        deviceInfo.Text = $"PC 정보: {info.DeviceName}, {info.OS}";
 
         MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
         defaultDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
         Server = new UdpAudioServer(PORT);
-        brodcasting = new BrodcastingController(PORT - 1);
+
+        var hostInfo = new HostInfo
+        {
+            ServiceMode = ServiceMode.Server,
+            DeviceName = info.DeviceName,
+            OS = info.OS,
+            Address = NetworkUtils.GetPrimaryIPv4Address(),
+            MultiCastAddress = Server.MulticastIPAddress.ToString()
+        };
+
+        brodcasting = new RemoteAudioBroadcastingController(PORT - 1, hostInfo, ServiceMode.Client);
         
         deviceDescription.TextChanged += (s, e) => brodcasting.HostInfo.Description = deviceDescription.Text;
     }

@@ -5,11 +5,11 @@
         public ServiceMode TargetServiceMode { get; }
         public HostInfo HostInfo { get; }
 
-        public RemoteAudioBroadcastingController(int port, HostInfo hostInfo, ServiceMode serviceMode)
+        public RemoteAudioBroadcastingController(int port, HostInfo hostInfo, ServiceMode targetServiceMode)
             : base(port, hostInfo)
         {
             HostInfo = hostInfo;
-            TargetServiceMode = serviceMode;
+            TargetServiceMode = targetServiceMode;
         }
 
         protected override bool ReceiveCallback(HostInfo data)

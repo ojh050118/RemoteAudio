@@ -1,6 +1,6 @@
 ﻿using NAudio.Wave;
-using RemoteAudio.Server.Audio;
-using RemoteAudio.Server.Utils;
+using RemoteAudio.Core.Audio.Windows;
+using RemoteAudio.Core.Utils;
 using System.Net;
 using System.Net.Sockets;
 
@@ -9,20 +9,18 @@ namespace RemoteAudio.Server.Networking
     public class UdpAudioServer : AudioCapturer
     {
         private UdpClient server;
-        private IPAddress address;
         private int port;
 
         private RTPPacketData data;
         private readonly Random random;
 
-        public const string MultiCastAddress = "229.1.1.229";
+        public IPAddress MulticastIPAddress { get; }
 
         public UdpAudioServer(int port)
         {
-            address = IPAddress.Parse(MultiCastAddress);
-
+            MulticastIPAddress = NetworkUtils.GetRandomMulticastAddress();
             server = new UdpClient(port);
-            server.JoinMulticastGroup(address);
+            server.JoinMulticastGroup(MulticastIPAddress);
             server.Ttl = 1;
 
             data = new RTPPacketData();
@@ -40,7 +38,7 @@ namespace RemoteAudio.Server.Networking
 
         private void sendAudio(byte[] audioData)
         {
-            data = server.SendRtpPacket(audioData, 0, data, new IPEndPoint(address, port));
+            data = server.SendRtpPacket(audioData, 0, data, new IPEndPoint(MulticastIPAddress, port));
             data.SequenceNumber++;
             data.Ssrc = (uint)random.NextInt64(0, uint.MaxValue);
         }
