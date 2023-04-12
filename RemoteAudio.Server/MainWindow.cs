@@ -34,7 +34,7 @@ public partial class MainWindow : Form
             MultiCastAddress = Server.MulticastIPAddress.ToString()
         };
 
-        brodcasting = new RemoteAudioBroadcastingController(PORT - 1, hostInfo, ServiceMode.Client);
+        brodcasting = new ServerBroadcastingController(PORT - 1, hostInfo);
         
         deviceDescription.TextChanged += (s, e) => brodcasting.HostInfo.Description = deviceDescription.Text;
     }
