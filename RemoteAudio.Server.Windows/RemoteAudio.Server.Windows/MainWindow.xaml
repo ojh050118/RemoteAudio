@@ -7,9 +7,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-        <TextBox Name="TextBox" PlaceholderText="Text me" MinWidth="200"></TextBox>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="AppTitleBar" Grid.Row="0">
+            <Image x:Name="TitleBarIcon" Source="/Images/finder.png"
+                   HorizontalAlignment="Left"
+                   Width="16" Height="16"
+                   Margin="8,0,0,0"/>
+            <TextBlock x:Name="TitleTextBlock"
+                Text="{x:Bind Title}"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                VerticalAlignment="Center"
+                Margin="28,0,0,0"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Grid.Row="1">
+            <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+            <TextBox Name="TextBox" PlaceholderText="Text me" MinWidth="200"></TextBox>
+        </StackPanel>
+    </Grid>
 </Window>
