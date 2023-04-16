@@ -17,7 +17,7 @@ namespace RemoteAudio.Server.Windows
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -27,11 +27,11 @@ namespace RemoteAudio.Server.Windows
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
-            WindowHelper.TrackWindow(m_window);
-            m_window.Activate();
+            mainWindow = new MainWindow();
+            WindowHelper.TrackWindow(mainWindow);
+            mainWindow.Activate();
         }
 
-        private Window m_window;
+        private Window mainWindow;
     }
 }
