@@ -8,8 +8,7 @@
     xmlns:local="using:RemoteAudio.Server.Windows.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
         <ToggleSwitch x:Name="titleBarSwitch" OffContent="Legacy title bar" OnContent="Custom title bar" Toggled="titleBarSwitch_Toggled" />
         <TextBox Name="TextBox" PlaceholderText="Text me" MinWidth="200"></TextBox>
