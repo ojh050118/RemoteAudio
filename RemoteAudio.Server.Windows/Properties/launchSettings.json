@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RemoteAudio.Server.Windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "RemoteAudio.Server.Windows (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

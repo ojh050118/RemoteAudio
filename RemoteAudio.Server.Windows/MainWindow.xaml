@@ -1,4 +1,4 @@
-﻿<Window
+<Window
     x:Class="RemoteAudio.Server.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar" x:FieldModifier="public" Grid.Row="0">
-            <Image x:Name="titleBarIcon" Source="/Images/WindowsAppRuntime.png"
+            <Image x:Name="titleBarIcon" Source="/Assets/WindowsAppRuntime.png"
                    HorizontalAlignment="Left"
                    Width="16" Height="16"
                    Margin="8,0,0,0"/>
