@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using RemoteAudio.Server.Windows.Helper;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,6 +28,7 @@ namespace RemoteAudio.Server.Windows
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+            WindowHelper.TrackWindow(m_window);
             m_window.Activate();
         }
 
