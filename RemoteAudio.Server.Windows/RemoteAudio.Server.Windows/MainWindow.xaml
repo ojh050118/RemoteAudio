@@ -24,7 +24,7 @@
                 Margin="28,0,0,0"/>
         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Grid.Row="1">
-            <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+            <Button x:Name="myButton" Click="myButton_Click"> Set custom title bar</Button>
             <TextBox Name="TextBox" PlaceholderText="Text me" MinWidth="200"></TextBox>
         </StackPanel>
     </Grid>

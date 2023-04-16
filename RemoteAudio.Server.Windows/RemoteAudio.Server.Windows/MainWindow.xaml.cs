@@ -15,25 +15,23 @@ namespace RemoteAudio.Server.Windows
         {
             InitializeComponent();
 
+            Title = "Remote Audio";
             SystemBackdrop = new MicaBackdrop();
-            Title = TitleTextBlock.Text = "Remote Audio";
-            ExtendsContentIntoTitleBar = true;
-            SetTitleBar(AppTitleBar);
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
-
             if (!ExtendsContentIntoTitleBar)
             {
                 ExtendsContentIntoTitleBar = true;
                 SetTitleBar(AppTitleBar);
+                myButton.Content = "Set legacy title bar";
             }
             else
             {
                 ExtendsContentIntoTitleBar = false;
                 SetTitleBar(null);
+                myButton.Content = "Set custom title bar";
             }
         }
     }
