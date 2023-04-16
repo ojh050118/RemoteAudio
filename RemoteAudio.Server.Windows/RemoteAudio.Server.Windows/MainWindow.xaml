@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar" Grid.Row="0">
-            <Image x:Name="TitleBarIcon" Source="/Images/finder.png"
+            <Image x:Name="TitleBarIcon" Source="/Images/WindowsAppRuntime.png"
                    HorizontalAlignment="Left"
                    Width="16" Height="16"
                    Margin="8,0,0,0"/>

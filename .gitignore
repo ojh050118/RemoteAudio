@@ -22,3 +22,4 @@ _ReSharper*/
 .idea/**/shelf
 .idea/**/discord.xml
 .idea/**/misc.xml
+*.cache
