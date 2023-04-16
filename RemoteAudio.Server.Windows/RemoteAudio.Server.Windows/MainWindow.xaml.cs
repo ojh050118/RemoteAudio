@@ -30,6 +30,8 @@ namespace RemoteAudio.Server.Windows
             AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             AppWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            AppWindow.TitleBar.ButtonHoverBackgroundColor = Colors.Gray;
+            AppWindow.TitleBar.ButtonPressedBackgroundColor = Colors.DarkGray;
             SetTitleBar(AppTitleBar);
         }
 
