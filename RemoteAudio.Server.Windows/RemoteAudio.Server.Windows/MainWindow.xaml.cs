@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -22,6 +23,14 @@ namespace RemoteAudio.Server.Windows
 
             Title = "Remote Audio";
             SystemBackdrop = new MicaBackdrop();
+
+            // 직접 ExtendsContentIntoTitleBar를 실행하면 작동하지 않아 임시적인 방법으로 해결합니다.
+            // AppWindow를 사용하여 해결하는 방식은 Windows 10 22621 버전 미만에서 작동하지 않습니다.
+            // 타이틀 바쪽의 테두리를 끌어 사이즈를 조절할 수 없습니다.
+            AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+            AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+            AppWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            SetTitleBar(AppTitleBar);
         }
 
         private void navigationView_Loaded(object sender, RoutedEventArgs e)
