@@ -18,7 +18,8 @@ namespace RemoteAudio.Server.Windows.Helper
 
         static public void TrackWindow(Window window)
         {
-            window.Closed += (sender, args) => {
+            window.Closed += (sender, args) =>
+            {
                 activeWindows.Remove(window);
             };
             activeWindows.Add(window);
