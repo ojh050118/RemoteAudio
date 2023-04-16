@@ -25,13 +25,11 @@ namespace RemoteAudio.Server.Windows
             {
                 ExtendsContentIntoTitleBar = true;
                 SetTitleBar(AppTitleBar);
-                myButton.Content = "Set legacy title bar";
             }
             else
             {
                 ExtendsContentIntoTitleBar = false;
                 SetTitleBar(null);
-                myButton.Content = "Set custom title bar";
             }
         }
     }
