@@ -1,4 +1,6 @@
 ﻿using RemoteAudio.Core.Utils;
+using System.Net;
+using Xamarin.Essentials;
 
 namespace RemoteAudio.Core.Networking
 {
@@ -34,12 +36,40 @@ namespace RemoteAudio.Core.Networking
         /// <summary>
         /// 멀티캐스트를 할 주소.
         /// </summary>
-        public string MultiCastAddress = NetworkUtil.GetRandomMulticastAddress().ToString();
+        public string MultiCastAddress { get; set; }
 
         /// <summary>
         /// 자신의 설명.
         /// </summary>
         public string Description { get; set; }
+
+        public static HostInfo GetHostInfo(ServiceMode serviceMode)
+        {
+            var deviceInfo = PlatformUtil.GetDeviceInfo();
+
+            return new HostInfo
+            {
+                ServiceMode = serviceMode,
+                DeviceName = deviceInfo.DeviceName,
+                OS = deviceInfo.OS,
+                Address = NetworkUtil.GetPrimaryIPv4Address(),
+                MultiCastAddress = NetworkUtil.GetRandomMulticastAddress().ToString(),
+            };
+        }
+
+        public static HostInfo GetHostInfo(ServiceMode serviceMode, IPAddress multiCastAddress)
+        {
+            var deviceInfo = PlatformUtil.GetDeviceInfo();
+
+            return new HostInfo
+            {
+                ServiceMode = serviceMode,
+                DeviceName = deviceInfo.DeviceName,
+                OS = deviceInfo.OS,
+                Address = NetworkUtil.GetPrimaryIPv4Address(),
+                MultiCastAddress = multiCastAddress.ToString(),
+            };
+        }
 
 
         public bool Equals(HostInfo h)

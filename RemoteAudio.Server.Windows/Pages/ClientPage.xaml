@@ -1,0 +1,83 @@
+<Page
+    x:Class="RemoteAudio.Server.Windows.Pages.ClientPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RemoteAudio.Server.Windows.Pages"
+    xmlns:core="using:RemoteAudio.Core.Networking"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="HostInfoListViewTemplate" x:DataType="core:HostInfo">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse x:Name="Ellipse"
+                    Grid.RowSpan="2"
+                    Width ="32"
+                    Height="32"
+                    Margin="6"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                <TextBlock Grid.Column="1"
+                    Text="{x:Bind DeviceName}"
+                    x:Phase="1"
+                    Style="{ThemeResource BaseTextBlockStyle}"
+                    Margin="12,6,0,0"/>
+                <TextBlock  Grid.Column="1"
+                    Grid.Row="1"
+                    Text="{x:Bind Address}"
+                    x:Phase="2"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    Margin="12,0,0,6"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Padding="15" RowSpacing="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="0">
+            <TextBlock Text="PC info" FontSize="32" />
+            <StackPanel Orientation="Vertical" Margin="10,0">
+                <TextBlock Text="{x:Bind deviceInfo.DeviceName}" FontWeight="SemiBold" FontSize="16" />
+                <TextBlock Text="{x:Bind deviceInfo.OS}" />
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="listView" 
+                      ItemTemplate="{StaticResource HostInfoListViewTemplate}"
+                      BorderThickness="1"
+                      BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                      Grid.Column="1">
+                
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Spacing="8" Grid.Row="1">
+                <Button x:Name="disconnectButton" Content="Disconnect" MinWidth="100" IsEnabled="False" Click="disconnectButton_Click" />
+                <Button x:Name="connectButton" Content="Connect" MinWidth="100" IsEnabled="True" Click="connectButton_Click" />
+            </StackPanel>            
+        </Grid>
+
+    </Grid>
+</Page>

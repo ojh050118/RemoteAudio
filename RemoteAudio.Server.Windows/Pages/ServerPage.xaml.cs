@@ -5,45 +5,40 @@ using RemoteAudio.Core.Platform;
 using RemoteAudio.Core.Utils;
 using RemoteAudio.Core.Networking.Server;
 using RemoteAudio.Server.Windows.Helper;
+using System.Net;
 
 namespace RemoteAudio.Server.Windows.Pages
 {
-    public sealed partial class HomePage : Page
+    public sealed partial class ServerPage : Page
     {
         public const int PORT = 6974;
 
         private IDeviceInfo deviceInfo;
         private MainWindow mainWindow;
-        private HostInfo hostInfo;
 
-        private UdpAudioServer server;
-        private RemoteAudioBroadcastingController broadcasting;
-
-        public HomePage()
+        public ServerPage()
         {
             InitializeComponent();
 
             deviceInfo = PlatformUtil.GetDeviceInfo();
-            Loaded += (_, __) => mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
-
-            server = new UdpAudioServer(PORT);
-
-            hostInfo = new HostInfo
+            Loaded += (_, __) =>
             {
-                ServiceMode = ServiceMode.Server,
-                DeviceName = deviceInfo.DeviceName,
-                OS = deviceInfo.OS,
-                Address = NetworkUtil.GetPrimaryIPv4Address(),
-                MultiCastAddress = server.MulticastIPAddress.ToString()
+                mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
             };
 
-            broadcasting = new ServerBroadcastingController(PORT - 1, hostInfo);
+            App.Server?.Dispose();
+            App.Listener?.Dispose();
+            App.Broadcasting?.Dispose();
+
+            App.HostInfo = HostInfo.GetHostInfo(ServiceMode.Server);
+            App.Server = new UdpAudioServer(PORT, IPAddress.Parse(App.HostInfo.MultiCastAddress));
+            App.Broadcasting = new ServerBroadcastingController(PORT - 1, App.HostInfo);
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            server.Start();
-            broadcasting.ReceiveBroadcast();
+            App.Server.Start();
+            App.Broadcasting.ReceiveBroadcast();
 
             stopButton.IsEnabled = true;
             mainWindow.IsPaneVisible = startButton.IsEnabled = false;
@@ -51,8 +46,8 @@ namespace RemoteAudio.Server.Windows.Pages
 
         private void stopButton_Click(object sender, RoutedEventArgs e)
         {
-            server.Stop();
-            broadcasting.StopReceivingBroadcast();
+            App.Server.Stop();
+            App.Broadcasting.StopReceivingBroadcast();
 
             stopButton.IsEnabled = false;
             mainWindow.IsPaneVisible = startButton.IsEnabled = true;

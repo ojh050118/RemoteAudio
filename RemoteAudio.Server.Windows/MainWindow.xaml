@@ -26,7 +26,8 @@
         <Grid x:Name="mainContent" Grid.Row="1">
             <NavigationView x:Name="navigationView" Loaded="navigationView_Loaded" ItemInvoked="navigationView_ItemInvoked">
                 <NavigationView.MenuItems>
-                    <NavigationViewItem Icon="Home" Content="Home" Tag="Home" />
+                    <NavigationViewItem Icon="Upload" Content="Server" Tag="Server" />
+                    <NavigationViewItem Icon="Download" Content="Client" Tag="Client" />
                     <NavigationViewItem Icon="ReportHacked" Content="Debug" Tag="Debug" />
                 </NavigationView.MenuItems>
                 <Frame x:Name="contentFrame" Navigated="contentFrame_Navigated"/>
