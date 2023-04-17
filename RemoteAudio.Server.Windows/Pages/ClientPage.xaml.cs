@@ -51,7 +51,7 @@ namespace RemoteAudio.Server.Windows.Pages
 
             App.Broadcasting.DataReceived += h =>
             {
-                listView.Items.Add(deviceInfo);
+                listView.Items.Add(h);
             };
         }
 
