@@ -40,8 +40,6 @@ namespace RemoteAudio.Server.Windows.Pages
                 mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
             };
 
-            listView.Loaded += (_, __) => listView.Items.Add(App.HostInfo);
-
             App.Server?.Dispose();
             App.Listener?.Dispose();
             App.Broadcasting?.Dispose();
