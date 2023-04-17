@@ -7,7 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-
+    <Grid Padding="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="0">
+            <TextBlock Text="PC info" FontSize="32" />
+            <StackPanel Orientation="Vertical" Margin="10,0">
+                <TextBlock Text="{x:Bind deviceInfo.DeviceName}" FontWeight="SemiBold" FontSize="16" />
+                <TextBlock Text="{x:Bind deviceInfo.OS}" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel x:Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Spacing="8" Grid.Row="1" >
+            <Button x:Name="stopButton" Content="Stop" MinWidth="100" IsEnabled="False" Click="stopButton_Click"/>
+            <Button x:Name="startButton" Content="Start" MinWidth="100" IsEnabled="True" Click="startButton_Click" />
+        </StackPanel>
     </Grid>
 </Page>

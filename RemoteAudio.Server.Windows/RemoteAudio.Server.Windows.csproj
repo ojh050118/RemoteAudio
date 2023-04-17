@@ -9,8 +9,9 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
-    <EnableMsixTooling>true</EnableMsixTooling>
+	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	<WindowspackageType>None</WindowspackageType>
+    <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +39,9 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteAudio.Core\RemoteAudio.Core.csproj" />
   </ItemGroup>
 
   <!-- 

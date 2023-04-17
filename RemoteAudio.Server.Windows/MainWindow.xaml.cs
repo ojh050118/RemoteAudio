@@ -10,6 +10,12 @@ namespace RemoteAudio.Server.Windows
 {
     public sealed partial class MainWindow : Window
     {
+        public bool IsPaneVisible
+        {
+            get => navigationView.IsPaneVisible;
+            set => navigationView.IsPaneVisible = value;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -24,6 +30,7 @@ namespace RemoteAudio.Server.Windows
         private void navigationView_Loaded(object sender, RoutedEventArgs e)
         {
             navigationView.SelectedItem = navigationView.MenuItems.FirstOrDefault();
+            navigate("Home", null);
         }
 
         private void navigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs e)
