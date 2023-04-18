@@ -32,7 +32,7 @@ namespace RemoteAudio.Server.Windows.Pages
             App.Broadcasting.ReceiveBroadcast();
 
             stopButton.IsEnabled = true;
-            mainWindow.IsPaneVisible = startButton.IsEnabled = false;
+            mainWindow.IsPaneVisible = startButton.IsEnabled = descriptionBox.IsEnabled = false;
         }
 
         private void stopButton_Click(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace RemoteAudio.Server.Windows.Pages
             App.Broadcasting.StopReceivingBroadcast();
 
             stopButton.IsEnabled = false;
-            mainWindow.IsPaneVisible = startButton.IsEnabled = true;
+            mainWindow.IsPaneVisible = startButton.IsEnabled = descriptionBox.IsEnabled = true;
         }
     }
 }
