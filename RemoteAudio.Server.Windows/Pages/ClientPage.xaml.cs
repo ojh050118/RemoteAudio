@@ -12,8 +12,6 @@ namespace RemoteAudio.Server.Windows.Pages
 {
     public sealed partial class ClientPage : Page
     {
-        public const int PORT = 6974;
-
         private IDeviceInfo deviceInfo;
         private MainWindow mainWindow;
 
@@ -29,23 +27,12 @@ namespace RemoteAudio.Server.Windows.Pages
                 mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
             };
 
-            App.Server?.Dispose();
-            App.Listener?.Dispose();
-            App.Broadcasting?.Dispose();
-
-            App.HostInfo = HostInfo.GetHostInfo(ServiceMode.Client);
-            App.Broadcasting = new RemoteAudioBroadcastingController(PORT - 1, App.HostInfo, ServiceMode.Server);
-
-            App.Broadcasting.DataReceived += h =>
-            {
-                listView.Items.Add(h);
-            };
-            listView.Items.Add(App.HostInfo);
+            ListView.Items.Add(App.HostInfo);
         }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Listener = new AudioListener(new IPEndPoint(IPAddress.Parse(selected.MultiCastAddress), PORT));
+            App.Listener = new AudioListener(new IPEndPoint(IPAddress.Parse(selected.MultiCastAddress), App.PORT));
             App.Listener.Start();
 
             disconnectButton.IsEnabled = true;

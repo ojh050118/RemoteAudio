@@ -11,8 +11,6 @@ namespace RemoteAudio.Server.Windows.Pages
 {
     public sealed partial class ServerPage : Page
     {
-        public const int PORT = 6974;
-
         private IDeviceInfo deviceInfo;
         private MainWindow mainWindow;
 
@@ -25,14 +23,6 @@ namespace RemoteAudio.Server.Windows.Pages
             {
                 mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
             };
-
-            App.Server?.Dispose();
-            App.Listener?.Dispose();
-            App.Broadcasting?.Dispose();
-
-            App.HostInfo = HostInfo.GetHostInfo(ServiceMode.Server);
-            App.Server = new UdpAudioServer(PORT, IPAddress.Parse(App.HostInfo.MultiCastAddress));
-            App.Broadcasting = new ServerBroadcastingController(PORT - 1, App.HostInfo);
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)

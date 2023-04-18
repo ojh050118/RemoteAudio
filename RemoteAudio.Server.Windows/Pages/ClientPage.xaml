@@ -6,6 +6,7 @@
     xmlns:core="using:RemoteAudio.Core.Networking"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -61,11 +62,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
-            <ListView x:Name="listView" 
+            <ListView x:Name="ListView" 
                       ItemTemplate="{StaticResource HostInfoListViewTemplate}"
                       BorderThickness="1"
                       BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
                       SelectionChanged="listView_SelectionChanged"
+                      x:FieldModifier="public"
                       Grid.Column="1">
                 
             </ListView>
