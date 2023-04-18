@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     NavigationCacheMode="Enabled"
+    xmlns:app="using:RemoteAudio.Server.Windows"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -62,6 +63,23 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Spacing="15" Grid.Column="0">
+                <TextBlock Text="Host info" FontSize="24" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Spacing="3" Margin="10,0">
+                        <TextBlock Text="Service mode" />
+                        <TextBlock Text="Description" />
+                        <TextBlock Text="Address" />
+                        <TextBlock Text="Multicast address" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Spacing="3" Margin="50,0">
+                        <TextBlock Text="{x:Bind app:App.HostInfo.ServiceMode}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.Description}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.Address}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.MultiCastAddress}" Foreground="DarkGray" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
             <ListView x:Name="ListView" 
                       ItemTemplate="{StaticResource HostInfoListViewTemplate}"
                       BorderThickness="1"

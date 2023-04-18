@@ -5,6 +5,7 @@
     xmlns:local="using:RemoteAudio.Server.Windows.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:app="using:RemoteAudio.Server.Windows"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
@@ -16,13 +17,32 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="0">
             <TextBlock Text="PC info" FontSize="32" />
-            <StackPanel Orientation="Vertical" Margin="10,0">
+            <StackPanel Orientation="Vertical" Spacing="3" Margin="10,0">
                 <TextBlock Text="{x:Bind deviceInfo.DeviceName}" FontWeight="SemiBold" FontSize="16" />
                 <TextBlock Text="{x:Bind deviceInfo.OS}" />
             </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1">
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Spacing="15" Grid.Column="0">
+                <TextBlock Text="Host info" FontSize="24" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Spacing="3" Margin="10,0">
+                        <TextBlock Text="Service mode" />
+                        <TextBlock Text="Description" />
+                        <TextBlock Text="Address" />
+                        <TextBlock Text="Multicast address" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Spacing="3" Margin="50,0">
+                        <TextBlock Text="{x:Bind app:App.HostInfo.ServiceMode}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind descriptionBox.Text}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.Address}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.MultiCastAddress}" Foreground="DarkGray" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -32,9 +52,11 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Stretch" IsEnabled="False" Click="stopButton_Click" Grid.Column="0" />
-                <Button x:Name="startButton" Content="Start" HorizontalAlignment="Stretch" IsEnabled="True" Click="startButton_Click" Grid.Column="1" />
+                <TextBox x:Name="descriptionBox" HorizontalAlignment="Stretch" PlaceholderText="Description" Grid.Column="0" />
+                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Stretch" IsEnabled="False" Click="stopButton_Click" Grid.Column="1" />
+                <Button x:Name="startButton" Content="Start" HorizontalAlignment="Stretch" IsEnabled="True" Click="startButton_Click" Grid.Column="2" />
             </Grid>
         </Grid>
     </Grid>
