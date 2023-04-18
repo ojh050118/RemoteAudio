@@ -76,12 +76,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel x:Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Spacing="8" Grid.Row="1">
-                <Button x:Name="searchButton" Content="Search" MinWidth="100" Click="searchButton_Click" />
-                <Button x:Name="disconnectButton" Content="Disconnect" MinWidth="100" IsEnabled="False" Click="disconnectButton_Click" />
-                <Button x:Name="connectButton" Content="Connect" MinWidth="100" IsEnabled="False" Click="connectButton_Click" />
-            </StackPanel>            
+            <Grid ColumnSpacing="8" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Stretch" Click="searchButton_Click" Grid.Column="0" />
+                <Button x:Name="disconnectButton" Content="Disconnect" HorizontalAlignment="Stretch" IsEnabled="False" Click="disconnectButton_Click" Grid.Column="1" />
+                <Button x:Name="connectButton" Content="Connect" HorizontalAlignment="Stretch" IsEnabled="False" Click="connectButton_Click" Grid.Column="2" />
+            </Grid>
         </Grid>
-
     </Grid>
 </Page>

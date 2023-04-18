@@ -8,10 +8,11 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
-    <Grid Padding="15">
+    <Grid Padding="15" RowSpacing="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="0">
             <TextBlock Text="PC info" FontSize="32" />
@@ -20,9 +21,21 @@
                 <TextBlock Text="{x:Bind deviceInfo.OS}" />
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="buttons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Spacing="8" Grid.Row="1" >
-            <Button x:Name="stopButton" Content="Stop" MinWidth="100" IsEnabled="False" Click="stopButton_Click"/>
-            <Button x:Name="startButton" Content="Start" MinWidth="100" IsEnabled="True" Click="startButton_Click" />
-        </StackPanel>
+        <Grid Grid.Row="1">
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid ColumnSpacing="8" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Stretch" IsEnabled="False" Click="stopButton_Click" Grid.Column="0" />
+                <Button x:Name="startButton" Content="Start" HorizontalAlignment="Stretch" IsEnabled="True" Click="startButton_Click" Grid.Column="1" />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
