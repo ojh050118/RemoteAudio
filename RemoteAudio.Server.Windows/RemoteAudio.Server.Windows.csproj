@@ -10,12 +10,9 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
 	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-	<WindowspackageType>None</WindowspackageType>
+	<WindowsPackageType>None</WindowsPackageType>
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Pages\ClientPage.xaml" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -45,11 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RemoteAudio.Core\RemoteAudio.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\ClientPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 
   <!-- 
