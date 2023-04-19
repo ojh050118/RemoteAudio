@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteAudio.Server.Windows", "RemoteAudio.Server\RemoteAudio.Server.Windows.csproj", "{B534D7CC-CB0A-4A49-8CA3-744559BC6924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteAudio.Server.Windows", "RemoteAudio.Server.Windows\RemoteAudio.Server.Windows.csproj", "{B534D7CC-CB0A-4A49-8CA3-744559BC6924}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteAudio.Client.iOS", "RemoteAudio.Client.iOS\RemoteAudio.Client.iOS.csproj", "{AFE8F4FC-277D-44EE-B74F-AE52930986DA}"
 EndProject
