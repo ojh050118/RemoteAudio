@@ -37,7 +37,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Spacing="3" Margin="50,0">
                         <TextBlock Text="{x:Bind app:App.HostInfo.ServiceMode}" Foreground="DarkGray" />
-                        <TextBlock Text="{x:Bind descriptionBox.Text}" Foreground="DarkGray" />
+                        <TextBlock x:Name="descriptionText" Text="{x:Bind app:App.HostInfo.Description}" Foreground="DarkGray" />
                         <TextBlock Text="{x:Bind app:App.HostInfo.Address}" Foreground="DarkGray" />
                         <TextBlock Text="{x:Bind app:App.HostInfo.MultiCastAddress}" Foreground="DarkGray" />
                     </StackPanel>

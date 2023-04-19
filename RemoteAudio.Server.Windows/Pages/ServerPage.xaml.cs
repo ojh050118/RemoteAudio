@@ -23,7 +23,10 @@ namespace RemoteAudio.Server.Windows.Pages
             {
                 mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
             };
-            descriptionBox.TextChanged += (s, e) => App.HostInfo.Description = descriptionBox.Text;
+            descriptionBox.TextChanged += (s, e) =>
+            {
+                App.HostInfo.Description = descriptionText.Text = descriptionBox.Text;
+            };
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
