@@ -1,72 +1,73 @@
-namespace RemoteAudio.Server;
-
 using NAudio.CoreAudioApi;
 using RemoteAudio.Core.Networking;
 using RemoteAudio.Core.Utils;
-using RemoteAudio.Server.Networking;
+using RemoteAudio.Server.Windows.Networking;
 
-public partial class MainWindow : Form
+namespace RemoteAudio.Server.Windows
 {
-    public UdpAudioServer Server;
-    public const int PORT = 6974;
-
-    private RemoteAudioBroadcastingController brodcasting;
-
-    private MMDevice defaultDevice;
-
-    public MainWindow()
+    public partial class MainWindow : Form
     {
-        InitializeComponent();
+        public UdpAudioServer Server;
+        public const int PORT = 6974;
 
-        var info = PlatformUtil.GetDeviceInfo();
-        deviceInfo.Text = $"PC 정보: {info.DeviceName}, {info.OS}";
+        private RemoteAudioBroadcastingController brodcasting;
 
-        MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
-        defaultDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-        Server = new UdpAudioServer(PORT);
+        private MMDevice defaultDevice;
 
-        var hostInfo = new HostInfo
+        public MainWindow()
         {
-            ServiceMode = ServiceMode.Server,
-            DeviceName = info.DeviceName,
-            OS = info.OS,
-            Address = NetworkUtil.GetPrimaryIPv4Address(),
-            MultiCastAddress = Server.MulticastIPAddress.ToString()
-        };
+            InitializeComponent();
 
-        brodcasting = new ServerBroadcastingController(PORT - 1, hostInfo);
+            var info = PlatformUtil.GetDeviceInfo();
+            deviceInfo.Text = $"PC 정보: {info.DeviceName}, {info.OS}";
+
+            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+            defaultDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            Server = new UdpAudioServer(PORT);
+
+            var hostInfo = new HostInfo
+            {
+                ServiceMode = ServiceMode.Server,
+                DeviceName = info.DeviceName,
+                OS = info.OS,
+                Address = NetworkUtil.GetPrimaryIPv4Address(),
+                MultiCastAddress = Server.MulticastIPAddress.ToString()
+            };
+
+            brodcasting = new ServerBroadcastingController(PORT - 1, hostInfo);
         
-        deviceDescription.TextChanged += (s, e) => brodcasting.HostInfo.Description = deviceDescription.Text;
-    }
+            deviceDescription.TextChanged += (s, e) => brodcasting.HostInfo.Description = deviceDescription.Text;
+        }
 
-    private void timer_Tick(object sender, EventArgs e)
-    {
-        var value = (int)(defaultDevice.AudioMeterInformation.MasterPeakValue * progressBar.Maximum);
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            var value = (int)(defaultDevice.AudioMeterInformation.MasterPeakValue * progressBar.Maximum);
 
-        progressBar.Value = value;
-    }
+            progressBar.Value = value;
+        }
 
-    private void startButton_Click(object sender, EventArgs e)
-    {
-        Server.Start();
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            Server.Start();
 
-        startButton.Enabled = false;
-        stopButton.Enabled = true;
-        deviceDescription.Enabled = false;
-        statusText.Text = "멀티캐스팅 중";
+            startButton.Enabled = false;
+            stopButton.Enabled = true;
+            deviceDescription.Enabled = false;
+            statusText.Text = "멀티캐스팅 중";
 
-        brodcasting.ReceiveBroadcast();
-    }
+            brodcasting.ReceiveBroadcast();
+        }
 
-    private void stopButton_Click(object sender, EventArgs e)
-    {
-        Server.Stop();
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            Server.Stop();
 
-        startButton.Enabled = true;
-        stopButton.Enabled = false;
-        deviceDescription.Enabled = true;
-        statusText.Text = "준비";
+            startButton.Enabled = true;
+            stopButton.Enabled = false;
+            deviceDescription.Enabled = true;
+            statusText.Text = "준비";
 
-        brodcasting.StopReceivingBroadcast();
+            brodcasting.StopReceivingBroadcast();
+        }
     }
 }

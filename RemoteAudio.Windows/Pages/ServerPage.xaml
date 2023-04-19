@@ -1,0 +1,63 @@
+<Page
+    x:Class="RemoteAudio.Windows.Pages.ServerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RemoteAudio.Windows.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:app="using:RemoteAudio.Windows"
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
+
+    <Grid Padding="15" RowSpacing="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="0">
+            <TextBlock Text="PC info" FontSize="32" />
+            <StackPanel Orientation="Vertical" Spacing="3" Margin="10,0">
+                <TextBlock Text="{x:Bind deviceInfo.DeviceName}" FontWeight="SemiBold" FontSize="16" />
+                <TextBlock Text="{x:Bind deviceInfo.OS}" />
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Spacing="15" Grid.Column="0">
+                <TextBlock Text="Host info" FontSize="24" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Spacing="3" Margin="10,0">
+                        <TextBlock Text="Service mode" />
+                        <TextBlock Text="Description" />
+                        <TextBlock Text="Address" />
+                        <TextBlock Text="Multicast address" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Spacing="3" Margin="50,0">
+                        <TextBlock Text="{x:Bind app:App.HostInfo.ServiceMode}" Foreground="DarkGray" />
+                        <TextBlock x:Name="descriptionText" Text="{x:Bind app:App.HostInfo.Description}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.Address}" Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind app:App.HostInfo.MultiCastAddress}" Foreground="DarkGray" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid ColumnSpacing="8" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="descriptionBox" HorizontalAlignment="Stretch" PlaceholderText="Description" Grid.Column="0" />
+                <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Stretch" IsEnabled="False" Click="stopButton_Click" Grid.Column="1" />
+                <Button x:Name="startButton" Content="Start" HorizontalAlignment="Stretch" IsEnabled="True" Click="startButton_Click" Grid.Column="2" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

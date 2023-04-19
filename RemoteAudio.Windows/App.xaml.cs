@@ -2,11 +2,11 @@
 using RemoteAudio.Core.Audio.Windows;
 using RemoteAudio.Core.Networking;
 using RemoteAudio.Core.Networking.Server;
-using RemoteAudio.Server.Windows.Helper;
+using RemoteAudio.Windows.Helper;
 using System;
 using System.Net;
 
-namespace RemoteAudio.Server.Windows
+namespace RemoteAudio.Windows
 {
     public partial class App : Application
     {
@@ -25,6 +25,7 @@ namespace RemoteAudio.Server.Windows
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
             mainWindow = new MainWindow();
+            WindowHelper.TrackWindow(mainWindow);
             mainWindow.Activate();
         }
 

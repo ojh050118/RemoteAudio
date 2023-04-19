@@ -4,7 +4,7 @@ using RemoteAudio.Core.Utils;
 using System.Net;
 using System.Net.Sockets;
 
-namespace RemoteAudio.Server.Networking
+namespace RemoteAudio.Server.Windows.Networking
 {
     public class UdpAudioServer : AudioCapturer
     {

@@ -1,6 +1,6 @@
 ﻿using RemoteAudio.Core.Networking;
 
-namespace RemoteAudio.Server.Networking
+namespace RemoteAudio.Server.Windows.Networking
 {
     public class ServerBroadcastingController : RemoteAudioBroadcastingController
     {

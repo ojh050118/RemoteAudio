@@ -1,11 +1,13 @@
-namespace RemoteAudio.Server;
-
-static class Program
+namespace RemoteAudio.Server.Windows
 {
-    [STAThread]
-    static void Main()
+    static class Program
     {
-        ApplicationConfiguration.Initialize();
-        Application.Run(new MainWindow());
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainWindow());
+        }
     }
 }
+
