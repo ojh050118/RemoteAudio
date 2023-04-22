@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using RemoteAudio.Core.Audio.Windows;
 using RemoteAudio.Core.Networking;
-using RemoteAudio.Windows.Helper;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -12,18 +11,11 @@ namespace RemoteAudio.Windows.Pages
 {
     public sealed partial class ClientPage : Page
     {
-        private MainWindow mainWindow;
-
         private HostInfo selected;
 
         public ClientPage()
         {
             InitializeComponent();
-
-            Loaded += (_, __) =>
-            {
-                mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
-            };
 
             ListView.Items.Add(App.HostInfo);
         }
@@ -34,7 +26,7 @@ namespace RemoteAudio.Windows.Pages
             App.Listener.Start();
 
             disconnectButton.IsEnabled = true;
-            mainWindow.IsPaneVisible = connectButton.IsEnabled = false;
+            connectButton.IsEnabled = false;
         }
 
         private void disconnectButton_Click(object sender, RoutedEventArgs e)
@@ -42,7 +34,7 @@ namespace RemoteAudio.Windows.Pages
             App.Listener?.Dispose();
 
             disconnectButton.IsEnabled = false;
-            mainWindow.IsPaneVisible = connectButton.IsEnabled = true;
+            connectButton.IsEnabled = true;
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +65,11 @@ namespace RemoteAudio.Windows.Pages
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
+            disconnectButton_Click(null, null);
+
+            if (selected == null)
+                connectButton.IsEnabled = false;
 
             App.DisposeUdpClients();
         }
