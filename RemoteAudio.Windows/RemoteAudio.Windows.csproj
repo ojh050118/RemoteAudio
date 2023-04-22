@@ -14,13 +14,6 @@
 	  <!--Msix 패키지를 빌드하려면 값을 MSIX로 바꿔야합니다.-->
 	<WindowsPackageType>MSIX</WindowsPackageType>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Assets\WindowsAppRuntime.png" />
-    <None Remove="Pages\ClientPage.xaml" />
-    <None Remove="Pages\DebugPage.xaml" />
-    <None Remove="Pages\ServerPage.xaml" />
-    <None Remove="Pages\SettingsPage.xaml" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -30,6 +23,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\WindowsAppRuntime.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,31 +40,6 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Update="App.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="MainWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Pages\ClientPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Pages\DebugPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="Pages\ServerPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="Pages\SettingsPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
   </ItemGroup>
 
   <!-- 

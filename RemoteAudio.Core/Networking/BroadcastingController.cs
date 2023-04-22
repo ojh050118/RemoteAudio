@@ -81,7 +81,7 @@ namespace RemoteAudio.Core.Networking
 
                 BeginReceive(receiveCallback, null);
             }
-            catch (Exception ex)
+            catch
             {
             }
         }

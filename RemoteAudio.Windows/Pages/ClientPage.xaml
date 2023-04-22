@@ -53,9 +53,9 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Spacing="15" Grid.Row="0">
             <TextBlock Text="PC info" FontSize="32" />
-            <StackPanel Orientation="Vertical" Margin="10,0">
-                <TextBlock Text="{x:Bind deviceInfo.DeviceName}" FontWeight="SemiBold" FontSize="16" />
-                <TextBlock Text="{x:Bind deviceInfo.OS}" />
+            <StackPanel Orientation="Vertical" Spacing="3" Margin="10,0">
+                <TextBlock Text="{x:Bind app:App.DeviceInfo.DeviceName}" FontWeight="SemiBold" FontSize="16" />
+                <TextBlock Text="{x:Bind app:App.DeviceInfo.OS}" />
             </StackPanel>
         </StackPanel>
         <Grid Grid.Row="1">
@@ -73,10 +73,10 @@
                         <TextBlock Text="Multicast address" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Spacing="3" Margin="50,0">
-                        <TextBlock Text="{x:Bind app:App.HostInfo.ServiceMode}" Foreground="DarkGray" />
-                        <TextBlock Text="{x:Bind app:App.HostInfo.Description}" Foreground="DarkGray" />
-                        <TextBlock Text="{x:Bind app:App.HostInfo.Address}" Foreground="DarkGray" />
-                        <TextBlock Text="{x:Bind app:App.HostInfo.MultiCastAddress}" Foreground="DarkGray" />
+                        <TextBlock x:Name="serviceModeText" Text="{x:Bind app:App.HostInfo.ServiceMode}" Foreground="DarkGray" />
+                        <TextBlock x:Name="descriptionText" Text="Not available" Foreground="DarkGray" />
+                        <TextBlock x:Name="addressText" Text="{x:Bind app:App.HostInfo.Address}" Foreground="DarkGray" />
+                        <TextBlock x:Name="multicastAddressText" Text="{x:Bind app:App.HostInfo.MultiCastAddress}" Foreground="DarkGray" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

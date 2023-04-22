@@ -2,9 +2,12 @@
 using RemoteAudio.Core.Audio.Windows;
 using RemoteAudio.Core.Networking;
 using RemoteAudio.Core.Networking.Server;
+using RemoteAudio.Core.Platform;
+using RemoteAudio.Core.Utils;
 using RemoteAudio.Windows.Helper;
 using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace RemoteAudio.Windows
 {
@@ -16,10 +19,17 @@ namespace RemoteAudio.Windows
         public static UdpAudioServer Server { get; set; }
         public static AudioListener Listener { get; set; }
         public static RemoteAudioBroadcastingController Broadcasting { get; set; }
+        public static IDeviceInfo DeviceInfo;
+
+        private static Action<HostInfo> dataReceived;
 
         public App()
         {
             InitializeComponent();
+            
+            DeviceInfo = PlatformUtil.GetDeviceInfo();
+            HostInfo = HostInfo.GetHostInfo(ServiceMode.Server);
+            Broadcasting = new RemoteAudioBroadcastingController(PORT - 1, HostInfo, ServiceMode.Client);
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
@@ -33,28 +43,37 @@ namespace RemoteAudio.Windows
         {
             Server?.Dispose();
             Listener?.Dispose();
-            Broadcasting?.Dispose();
         }
 
-        public static void InitializeUdpClient(ServiceMode serviceMode, Action<HostInfo> dataReceived = null)
+        public static async Task InitializeUdpClient(ServiceMode serviceMode, Action<HostInfo> dataReceived = null)
         {
+            HostInfo.ServiceMode = serviceMode;
+            Broadcasting.DataReceived -= App.dataReceived;
+            Broadcasting.DataReceived += App.dataReceived = dataReceived;
+
             switch (serviceMode)
             {
                 case ServiceMode.Server:
-                    HostInfo = HostInfo.GetHostInfo(ServiceMode.Server);
+                    await Task.CompletedTask;
                     Server = new UdpAudioServer(PORT, IPAddress.Parse(HostInfo.MultiCastAddress));
-                    Broadcasting = new ServerBroadcastingController(PORT - 1, HostInfo);
-                    Broadcasting.DataReceived += dataReceived;
+
+                    Broadcasting.TargetServiceMode = ServiceMode.Client;
+                    Broadcasting.DataReceived += serverDataReceived;
 
                     break;
 
                 case ServiceMode.Client:
-                    HostInfo = HostInfo.GetHostInfo(ServiceMode.Client);
-                    Broadcasting = new RemoteAudioBroadcastingController(PORT - 1, HostInfo, ServiceMode.Server);
-                    Broadcasting.DataReceived += dataReceived;
+                    await Task.CompletedTask;
+                    Broadcasting.TargetServiceMode = ServiceMode.Server;
+                    Broadcasting.DataReceived -= serverDataReceived;
 
                     break;
             }
+        }
+
+        private static void serverDataReceived(HostInfo info)
+        {
+            Broadcasting.Broadcast();
         }
 
         private Window mainWindow;

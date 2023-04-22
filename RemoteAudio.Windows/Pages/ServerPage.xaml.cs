@@ -1,24 +1,20 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using RemoteAudio.Core.Networking;
-using RemoteAudio.Core.Platform;
-using RemoteAudio.Core.Utils;
-using RemoteAudio.Core.Networking.Server;
 using RemoteAudio.Windows.Helper;
-using System.Net;
+using System.Threading.Tasks;
 
 namespace RemoteAudio.Windows.Pages
 {
     public sealed partial class ServerPage : Page
     {
-        private IDeviceInfo deviceInfo;
         private MainWindow mainWindow;
 
         public ServerPage()
         {
             InitializeComponent();
 
-            deviceInfo = PlatformUtil.GetDeviceInfo();
             Loaded += (_, __) =>
             {
                 mainWindow = WindowHelper.GetWindowForElement(this) as MainWindow;
@@ -45,6 +41,25 @@ namespace RemoteAudio.Windows.Pages
 
             stopButton.IsEnabled = false;
             mainWindow.IsPaneVisible = startButton.IsEnabled = descriptionBox.IsEnabled = true;
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            await Task.Run(() => App.InitializeUdpClient(ServiceMode.Server));
+
+            serviceModeText.Text = App.HostInfo.ServiceMode.ToString();
+            descriptionText.Text = App.HostInfo.Description;
+            addressText.Text = App.HostInfo.Address;
+            multicastAddressText.Text = App.HostInfo.MultiCastAddress;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+
+            App.DisposeUdpClients();
         }
     }
 }

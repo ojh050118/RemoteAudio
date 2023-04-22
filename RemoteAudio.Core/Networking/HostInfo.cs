@@ -1,6 +1,5 @@
 ﻿using RemoteAudio.Core.Utils;
 using System.Net;
-using Xamarin.Essentials;
 
 namespace RemoteAudio.Core.Networking
 {
@@ -72,9 +71,10 @@ namespace RemoteAudio.Core.Networking
         }
 
 
-        public bool Equals(HostInfo h)
+        public bool Equals(HostInfo? h)
         {
-            return ServiceMode == h.ServiceMode &&
+            return h != null &&
+                   ServiceMode == h.ServiceMode &&
                    DeviceName == h.DeviceName &&
                    OS == h.OS &&
                    Address == h.Address &&

@@ -3,8 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
-using RemoteAudio.Core.Networking;
-using RemoteAudio.Windows.Pages;
 using System;
 using System.Linq;
 
@@ -32,7 +30,6 @@ namespace RemoteAudio.Windows
         private void navigationView_Loaded(object sender, RoutedEventArgs e)
         {
             navigationView.SelectedItem = navigationView.MenuItems.FirstOrDefault();
-            navigate("Server", null);
         }
 
         private void navigate(string tag, NavigationTransitionInfo transitionInfo)
@@ -47,16 +44,6 @@ namespace RemoteAudio.Windows
 
         private void contentFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            if (e.Content is ServerPage)
-            {
-                App.DisposeUdpClients();
-                App.InitializeUdpClient(ServiceMode.Server);
-            }
-            else if (e.Content is ClientPage)
-            {
-                App.DisposeUdpClients();
-                App.InitializeUdpClient(ServiceMode.Client, h => (e.Content as ClientPage).ListView.Items.Add(h));
-            }
         }
 
         private void navigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs e)
